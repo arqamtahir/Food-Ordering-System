@@ -1,0 +1,2 @@
+class PromoToken < ApplicationRecord
+end
