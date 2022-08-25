@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_25_112141) do
+ActiveRecord::Schema.define(version: 2022_08_25_113015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -158,6 +158,13 @@ ActiveRecord::Schema.define(version: 2022_08_25_112141) do
     t.string "location"
     t.string "contact"
     t.integer "open_close_status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "selected_addons", force: :cascade do |t|
+    t.integer "addon_id"
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
