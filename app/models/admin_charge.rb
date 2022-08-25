@@ -1,0 +1,2 @@
+class AdminCharge < ApplicationRecord
+end
