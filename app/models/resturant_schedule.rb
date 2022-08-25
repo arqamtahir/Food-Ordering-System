@@ -1,0 +1,2 @@
+class ResturantSchedule < ApplicationRecord
+end
