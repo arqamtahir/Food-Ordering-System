@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  price: 1.5
+  deal_saved: 1.5
+  post_status: 1
+  free_item: MyString
+  free_item_price: 1.5
+
+two:
+  name: MyString
+  description: MyString
+  price: 1.5
+  deal_saved: 1.5
+  post_status: 1
+  free_item: MyString
+  free_item_price: 1.5
