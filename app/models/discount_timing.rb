@@ -1,0 +1,2 @@
+class DiscountTiming < ApplicationRecord
+end
