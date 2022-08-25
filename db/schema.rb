@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_25_114508) do
+ActiveRecord::Schema.define(version: 2022_08_25_114734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,13 @@ ActiveRecord::Schema.define(version: 2022_08_25_114508) do
     t.string "token_name"
     t.float "discount_percentage"
     t.integer "post_status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "resturant_earnings", force: :cascade do |t|
+    t.float "amount_earn"
+    t.datetime "pay_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,2 @@
+class ResturantEarning < ApplicationRecord
+end
