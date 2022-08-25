@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 1
+  discount_percentage: 1.5
+  post_status: 1
+
+two:
+  type: 1
+  discount_percentage: 1.5
+  post_status: 1
