@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_29_131222) do
+ActiveRecord::Schema.define(version: 2022_08_29_132658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 2022_08_29_131222) do
     t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customers_promo_tokens", id: false, force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "promo_token_id", null: false
+    t.index ["customer_id", "promo_token_id"], name: "index_customers_promo_tokens_on_customer_id_and_promo_token_id"
+    t.index ["promo_token_id", "customer_id"], name: "index_customers_promo_tokens_on_promo_token_id_and_customer_id"
   end
 
   create_table "cut_offs", force: :cascade do |t|
