@@ -3,4 +3,5 @@ class Order < ApplicationRecord
   belongs_to :resturants
   belongs_to :employees
   belongs_to :promo_tokens
+  has_one :payment
 end
