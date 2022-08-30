@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_063523) do
+ActiveRecord::Schema.define(version: 2022_08_30_124536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,14 @@ ActiveRecord::Schema.define(version: 2022_08_30_063523) do
     t.float "total_amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "customer_id", null: false
+    t.bigint "resturant_id", null: false
+    t.bigint "promo_token_id", null: false
+    t.bigint "employee_id", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["employee_id"], name: "index_orders_on_employee_id"
+    t.index ["promo_token_id"], name: "index_orders_on_promo_token_id"
+    t.index ["resturant_id"], name: "index_orders_on_resturant_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -280,10 +288,13 @@ ActiveRecord::Schema.define(version: 2022_08_30_063523) do
   end
 
   create_table "selected_addons", force: :cascade do |t|
-    t.integer "addon_id"
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "addon_id", null: false
+    t.bigint "order_item_id", null: false
+    t.index ["addon_id"], name: "index_selected_addons_on_addon_id"
+    t.index ["order_item_id"], name: "index_selected_addons_on_order_item_id"
   end
 
   create_table "timings", force: :cascade do |t|
@@ -323,6 +334,12 @@ ActiveRecord::Schema.define(version: 2022_08_30_063523) do
   add_foreign_key "menus", "resturants"
   add_foreign_key "option_items", "food_items"
   add_foreign_key "option_items", "options"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "employees"
+  add_foreign_key "orders", "promo_tokens"
+  add_foreign_key "orders", "resturants"
   add_foreign_key "resturant_schedules", "resturants"
+  add_foreign_key "selected_addons", "addons"
+  add_foreign_key "selected_addons", "order_items"
   add_foreign_key "token_valid_dates", "promo_tokens"
 end

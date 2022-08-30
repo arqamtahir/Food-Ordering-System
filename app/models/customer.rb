@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
   has_and_belongs_to_many :promo_tokens
-  
+  has_many :order
   
   
   # Include default devise modules. Others available are:
