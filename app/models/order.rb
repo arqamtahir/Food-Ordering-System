@@ -4,4 +4,5 @@ class Order < ApplicationRecord
   belongs_to :employees
   belongs_to :promo_tokens
   has_one :payment
+  has_one :admin_charge
 end
