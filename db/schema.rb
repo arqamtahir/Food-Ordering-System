@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_063039) do
+ActiveRecord::Schema.define(version: 2022_08_30_063523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 2022_08_30_063039) do
     t.string "end_day"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "discount_id", null: false
+    t.index ["discount_id"], name: "index_discount_timings_on_discount_id"
   end
 
   create_table "discounts", force: :cascade do |t|
@@ -315,6 +317,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_063039) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "discount_timings", "discounts"
   add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "employees", "resturants"
   add_foreign_key "menus", "resturants"
