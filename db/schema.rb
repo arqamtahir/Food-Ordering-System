@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_140234) do
+ActiveRecord::Schema.define(version: 2022_08_30_141847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,9 @@ ActiveRecord::Schema.define(version: 2022_08_30_140234) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "deal_itemable_type", null: false
+    t.bigint "deal_itemable_id", null: false
+    t.index ["deal_itemable_type", "deal_itemable_id"], name: "index_deal_items_on_deal_itemable"
   end
 
   create_table "deal_items_deals", id: false, force: :cascade do |t|
