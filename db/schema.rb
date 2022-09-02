@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_02_064136) do
+ActiveRecord::Schema.define(version: 2022_09_02_104941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,10 +43,16 @@ ActiveRecord::Schema.define(version: 2022_09_02_064136) do
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
     t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
   create_table "customers_promo_tokens", id: false, force: :cascade do |t|
@@ -119,14 +125,20 @@ ActiveRecord::Schema.define(version: 2022_09_02_064136) do
   create_table "employees", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
     t.string "phone"
     t.string "designation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "resturant_id", null: false
     t.bigint "manager_id"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["manager_id"], name: "index_employees_on_manager_id"
+    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
     t.index ["resturant_id"], name: "index_employees_on_resturant_id"
   end
 
