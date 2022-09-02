@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :employees
   devise_for :customers
   root 'home#index'
   get 'home/index'
