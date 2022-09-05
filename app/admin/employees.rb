@@ -16,4 +16,15 @@ ActiveAdmin.register Employee do
     actions
    end
 
-end
+    filter :id
+    filter :first_name
+    filter :last_name
+    filter :phone
+    filter :designation
+    filter :resturant_id
+    filter :manager_id
+    filter :email
+    filter :created_at
+    filter :updated_at
+ 
+  end
