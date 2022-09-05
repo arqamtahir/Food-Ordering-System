@@ -1,3 +1,19 @@
 ActiveAdmin.register Employee do
-  permit_params :first_name, :last_name, :phone, :designation, :resturant_id, :manager_id, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at
+  permit_params :first_name, :last_name, :phone, :designation, :resturant_id, :manager_id, :email, :encrypted_password
+
+  index do 
+    selectable_column
+    column :id
+    column :first_name
+    column :last_name
+    column :phone
+    column :designation
+    column :resturant_id
+    column :manager_id
+    column :email
+    column :created_at
+    column :updated_at
+    actions
+   end
+
 end
