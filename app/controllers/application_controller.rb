@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-    # Authenticate_invitor method
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  # Authenticate_invitor method
     protected
 
     def authenticate_inviter!
