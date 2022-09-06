@@ -1,5 +1,5 @@
 ActiveAdmin.register Employee do
-  permit_params :first_name, :last_name, :phone, :designation, :resturant_id, :manager_id, :email, :encrypted_password
+  permit_params :first_name, :last_name, :phone, :email, :password,:password_confirmation
 
   action_item :view_site do
     link_to "Invite Employee", new_employee_invitation_path
