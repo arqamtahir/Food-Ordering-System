@@ -18,7 +18,7 @@ ActiveAdmin.register Employee do
     column :created_at
     column :updated_at
     actions
-   end
+  end
 
     filter :id
     filter :first_name
@@ -48,5 +48,18 @@ ActiveAdmin.register Employee do
       end
       active_admin_comments
     end
-
+    
+    form do |f|
+      inputs "Details" do
+        input :first_name
+        input :last_name
+        input :email
+        input :restaurant
+        input :manager
+        input :joining_date
+        input :password
+        actions
+      end
+    end
+    
   end
