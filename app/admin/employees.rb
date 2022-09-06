@@ -30,5 +30,23 @@ ActiveAdmin.register Employee do
     filter :email
     filter :created_at
     filter :updated_at
- 
+    
+    show do
+      attributes_table do
+        row :first_name
+        row :last_name
+        row :email
+        row :resturant_id
+        row :manager_id
+        row :created_at
+        row :updated_at
+        row :invitation_token
+        row :invitation_created_at
+        row :invitation_sent_at
+        row :invitation_accepted_at
+        row :invited_by
+      end
+      active_admin_comments
+    end
+
   end
