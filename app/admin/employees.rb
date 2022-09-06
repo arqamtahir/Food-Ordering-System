@@ -54,9 +54,8 @@ ActiveAdmin.register Employee do
         input :first_name
         input :last_name
         input :email
-        input :restaurant
-        input :manager
-        input :joining_date
+        input :resturant_id
+        input :manager_id
         input :password
         actions
       end
