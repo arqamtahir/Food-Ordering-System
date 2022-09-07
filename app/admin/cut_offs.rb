@@ -5,7 +5,7 @@ ActiveAdmin.register CutOff do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :percentage
+  permit_params :percentage
   #
   # or
   #
