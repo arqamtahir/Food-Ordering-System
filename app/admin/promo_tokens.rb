@@ -5,7 +5,7 @@ ActiveAdmin.register PromoToken do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :token_name, :discount_percentage, :post_status
+  permit_params :token_name, :discount_percentage, :post_status
   #
   # or
   #
