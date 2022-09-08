@@ -9,6 +9,7 @@ class AddonsController < ApplicationController
     end
 
     def new
+			@addon=Addon.new
     end
 
     def edit
