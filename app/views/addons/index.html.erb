@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="card">
         <h5 class="card-header">Addons</h5>
-        
+
         <div class="card-body">
           <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -19,11 +19,11 @@
             <tbody>
               <% @addons.each do |addon| %>
                 <tr>
-                    <td><%=addon.id%></td>
-                    <td><%=addon.name%></td>
-                    <td><%=addon.description%></td>
-                    <td><%=addon.price%></td>
-                    <td><%=addon.post_status%></td>
+                  <td><%=addon.id%></td>
+                  <td><%=addon.name%></td>
+                  <td><%=addon.description%></td>
+                  <td><%=addon.price%></td>
+                  <td><%=addon.post_status%></td>
                 </tr>
 							<% end %>
             </tbody>
