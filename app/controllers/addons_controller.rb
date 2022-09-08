@@ -16,7 +16,8 @@ class AddonsController < ApplicationController
     end
 
     def create
-
+			@addon=Addon.new(params.require(:addon).permit(:name,:description,:price,:post_status))
+			@addon.save
     end
 
     def update
