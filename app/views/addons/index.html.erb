@@ -1,10 +1,10 @@
 <section class="page-content container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-10">
       <div class="card">
-        <h5 class="card-header">Addons</h5>
+        <h1 class="card-header col-6 ">Addons</h1>        
 
-        <div class="card-body">
+        <div class="card-body ">
           <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
             <thead>
               <tr>
@@ -31,5 +31,10 @@
         </div>
       </div>
     </div>
+    
+    <%= link_to new_addon_path,class:"btn btn-success btn-floating btn-prime col-md-2 " do %>
+      <span>+ Add Addon</span>
+    <% end %>
   </div>
 </section>
+
