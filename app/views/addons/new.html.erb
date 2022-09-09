@@ -28,11 +28,10 @@
 					</div>
 
 					<div class="form-group">
-						<%= f.label :status, class: "col-3 col-form-label"%>
-						<%= f.radio_button :post_status,1 %>
-						<%= f.label :post_status, "availabale" %>
-						<%= f.radio_button :post_status,2 %>
-						<%= f.label :post_status, "not availabale" %>
+						<%=f.label :post_status, "Addon Status" %>
+						<%= f.select(:post_status, Addon.post_statuses.keys) %>
+					</div>
+					
 					<div class="card-footer">
 						<%= f.submit class: "btn btn-primary" %>
 					</div>
