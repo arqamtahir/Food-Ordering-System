@@ -13,6 +13,7 @@ class AddonsController < ApplicationController
     end
 
     def edit
+      @addon=Addon.find(params[:id])
     end
 
     def create
