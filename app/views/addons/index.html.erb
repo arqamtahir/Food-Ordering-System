@@ -10,9 +10,11 @@
               <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Description</th>
+                <%# <th>Description</th> %>
                 <th>Price</th>
                 <th>Status</th>
+                <th scope="col">Actions</th>
+
               </tr>
             </thead>
 
@@ -21,9 +23,13 @@
                 <tr>
                   <td><%=addon.id%></td>
                   <td><%=addon.name%></td>
-                  <td><%=addon.description%></td>
+                  <%# <td><%=addon.description%>
                   <td><%=addon.price%></td>
                   <td><%=addon.post_status%></td>
+
+                  <td>
+                    <%= link_to "edit",edit_addon_path(addon) %>
+                  </td>
                 </tr>
 							<% end %>
             </tbody>
@@ -37,4 +43,3 @@
     <% end %>
   </div>
 </section>
-
