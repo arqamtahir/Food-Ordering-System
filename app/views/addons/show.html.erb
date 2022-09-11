@@ -13,6 +13,7 @@
                 <th>Description</th>
                 <th>Price</th>
                 <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -23,6 +24,12 @@
 								<td><%=@addon.description%></td>
 								<td><%=@addon.price%></td>
 								<td><%=@addon.post_status%></td>
+                <td>
+                  <%= link_to "edit ",edit_addon_path(@addon),
+                    class: "btn btn-sm btn-warning"%>
+                  <%= link_to "delete",addon_path(@addon) ,method: :delete, data: {confirm: 'Are you sure?'},
+                    class: 'btn btn-sm btn-danger' %>
+                </td>
 							</tr>
             </tbody>
           </table>
