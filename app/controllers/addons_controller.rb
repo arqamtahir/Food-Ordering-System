@@ -18,15 +18,20 @@ class AddonsController < ApplicationController
 
     def create
 			@addon=Addon.new(permit_params)
-			@addon.save
+			if @addon.save
+        redirect_to addons_path
+			end
+
     end
 
     def update
 			@addon.update(permit_params)
+      redirect_to addons_path(@addon)
     end
 
     def destroy
       @addon.destroy
+      redirect_to addons_path
     end
 
     private
