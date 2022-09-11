@@ -1,11 +1,11 @@
 class AddonsController < ApplicationController
+  before_action :set_addon, only: [:show, :edit, :update, :destroy]
 
     def index
       @addons=Addon.all
     end
 
     def show
-			@addon=Addon.find(params[:id])
     end
 
     def new
@@ -13,7 +13,6 @@ class AddonsController < ApplicationController
     end
 
     def edit
-      @addon=Addon.find(params[:id])
     end
 
     def create
@@ -22,13 +21,17 @@ class AddonsController < ApplicationController
     end
 
     def update
-      @addon=Addon.find(params[:id])
 			@addon.update(params.require(:addon).permit(:name,:description,:price,:post_status))
     end
 
     def destroy
-      @addon=Addon.find(params[:id])
       @addon.destroy
     end
-    
+
+    private
+
+    def set_addon
+      @addon=Addon.find(params[:id])
+    end
+
 end
