@@ -23,7 +23,7 @@ class AddonsController < ApplicationController
 
     def update
       @addon=Addon.find(params[:id])
-			@addon=Addon.update(params.require(:addon).permit(:name,:description,:price,:post_status))
+			@addon.update(params.require(:addon).permit(:name,:description,:price,:post_status))
     end
 
     def destroy
