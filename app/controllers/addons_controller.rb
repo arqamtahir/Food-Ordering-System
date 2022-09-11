@@ -19,19 +19,33 @@ class AddonsController < ApplicationController
     def create
 			@addon=Addon.new(permit_params)
 			if @addon.save
+        flash[:notice] = "addon created successfully"
         redirect_to addons_path
+      else
+        flash[:alert] = "Therer is some issue addon not created"
+        render :action => 'new'
 			end
 
     end
 
     def update
-			@addon.update(permit_params)
-      redirect_to addons_path(@addon)
+			if @addon.update(permit_params)
+        flash[:notice] = "addon updated successfully"
+        redirect_to addons_path(@addon)
+      else
+        flash[:alert] = "Therer is some issue addon not updated"
+        render :action => "update"
+      end
     end
 
     def destroy
-      @addon.destroy
-      redirect_to addons_path
+      if @addon.destroy
+        flash[:notice] = "addon deleted successfully"
+        redirect_to addons_path
+      else
+        flash[:alert] = "Therer is some issue addon not deleted"
+        render :action => "index"
+      end
     end
 
     private
