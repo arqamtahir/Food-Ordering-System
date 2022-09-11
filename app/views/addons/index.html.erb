@@ -28,7 +28,12 @@
                   <td><%=addon.post_status%></td>
 
                   <td>
-                    <%= link_to "edit",edit_addon_path(addon) %>
+                    <%= link_to "edit ",edit_addon_path(addon),
+                    class: "btn btn-sm btn-warning"%>
+                    <%= link_to " show",addon_path(addon),
+                    class: "btn btn-sm btn-success"%>
+                    <%= link_to "delete",addon_path(addon) ,method: :delete, data: {confirm: 'Are you sure?'},
+                                          class: 'btn btn-sm btn-danger' %>
                   </td>
                 </tr>
 							<% end %>
