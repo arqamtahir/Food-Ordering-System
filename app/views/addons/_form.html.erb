@@ -1,5 +1,7 @@
 <div class="card-body">
 	<%= form_with(model: @addon, class: "shadow p-3 mb-3 rounded", local: true) do |f| %>
+	  <%= f.hidden_field :resturant_id, value: current_employee.resturant_id %>
+
 		<div class="form-group">
 			<%= f.label :name, class: "col-2 col-form-label" %>
 			<%= f.text_field :name, class: "form-control input-rounded shadow rounded", placeholder: "name of addon" %>          
@@ -11,8 +13,8 @@
 		</div>
 
 		<div class="form-group row">
-				<%= f.label :select_menus , class: "col-3 col-form-label control-label text-right"%>
-				<%= f.collection_select :menu_id, Menu.all, :id, :name ,class:"form-control select2-hidden-accessible input-rounded shadow rounded", multiple: true%>
+			<%= f.label :select_menus , class: "col-3 col-form-label control-label text-right"%>
+			<%= f.collection_select :menu_id, Menu.all, :id, :name ,class:"form-control select2-hidden-accessible input-rounded shadow rounded", multiple: true%>
 		</div>
 
 		<div class="form-group">
