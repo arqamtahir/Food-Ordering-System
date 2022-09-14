@@ -15,6 +15,11 @@
 						<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of addon", autocomplete: "name" %>
           </div>
 
+					<div class="form-group row">
+	            <%= f.label :select_menus , class: "col-3 col-form-label control-label text-right"%>
+							<%= f.collection_select :menu_id, Menu.all, :id, :name ,class:"form-control select2-hidden-accessible input-rounded shadow rounded", multiple: true%>
+					</div>
+
           <div class="form-group">
 						<%= f.label :price, class: "col-3 col-form-label"%>
 						
@@ -40,3 +45,4 @@
     </div>
   </div>
 </div>
+
