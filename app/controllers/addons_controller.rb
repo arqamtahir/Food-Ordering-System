@@ -55,7 +55,7 @@ class AddonsController < ApplicationController
     end
 
     def permit_params
-      params.require(:addon).permit(:name,:description,:price,:post_status)
+      params.require(:addon).permit(:name,:description,:price,:post_status,menu_ids: [])
     end
 
 end
