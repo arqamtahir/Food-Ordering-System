@@ -34,7 +34,7 @@ class MenusController < ApplicationController
       redirect_to menus_path(@menu)
     else
       flash[:alert] = "Therer is some issue menu not updated"
-      render :action => "update"
+      render :action => "show"
     end
   end
 
@@ -55,6 +55,6 @@ class MenusController < ApplicationController
   end
 
   def permit_params
-    params.require(:menu).permit(:name, addon_ids: [])
+    params.require(:menu).permit(:name, :resturant_id, addon_ids: [])
   end
 end
