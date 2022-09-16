@@ -34,7 +34,7 @@ class AddonsController < ApplicationController
         redirect_to addons_path(@addon)
       else
         flash[:alert] = "Therer is some issue addon not updated"
-        render :action => "update"
+        render :action => "show"
       end
     end
 
