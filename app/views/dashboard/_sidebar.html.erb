@@ -36,7 +36,32 @@
           
           <ul class="collapse nav-sub" aria-expanded="true">
             <li class="active">
-              <%= link_to  "Addons", addons_path %>
+              <%= link_to  "Show menus", menus_path %>
+            </li>
+          </ul>
+
+          <ul class="collapse nav-sub" aria-expanded="true">
+            <li class="active">
+              <%= link_to  "Add new menu", new_menu_path %>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-dropdown active">
+          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
+            <i class="icon dripicons-meter" id="sidebar-text"></i>
+            <span>Addons</span>
+          </a>
+          
+          <ul class="collapse nav-sub" aria-expanded="true">
+            <li class="active">
+              <%= link_to  "Show Addons", addons_path %>
+            </li>
+          </ul>
+
+          <ul class="collapse nav-sub" aria-expanded="true">
+            <li class="active">
+              <%= link_to  "Add new Addon", new_addon_path %>
             </li>
           </ul>
         </li>
