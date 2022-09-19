@@ -18,12 +18,13 @@ class AddonsController < ApplicationController
 
     def create
 			@addon=Addon.new(permit_params)
-			if @addon.save
+			
+      if @addon.save
         flash[:notice] = "addon created successfully"
         redirect_to addons_path
       else
         flash[:alert] = "Therer is some issue addon not created"
-        render :action => 'new'
+        render :new
 			end
 
     end
@@ -55,7 +56,11 @@ class AddonsController < ApplicationController
     end
 
     def permit_params
-      params.require(:addon).permit(:name,:description,:price,:post_status,menu_ids: [])
+      params.require(:addon).permit(
+        :name,
+        :description,
+        :price,
+        :post_status,
+        menu_ids: [])
     end
-
 end
