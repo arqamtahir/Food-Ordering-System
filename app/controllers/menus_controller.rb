@@ -3,7 +3,7 @@ class MenusController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
   def index
-    @menus=Menu.all
+    @menus=current_employee.resturant.menus
   end
 
   def show
