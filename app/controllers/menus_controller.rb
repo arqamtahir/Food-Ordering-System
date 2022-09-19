@@ -23,7 +23,7 @@ class MenusController < ApplicationController
       redirect_to menus_path
     else
       flash[:alert] = "Therer is some issue menu not created"
-      render :action => 'new'
+      render :new
     end
 
   end
@@ -34,7 +34,7 @@ class MenusController < ApplicationController
       redirect_to menus_path(@menu)
     else
       flash[:alert] = "Therer is some issue menu not updated"
-      render :action => "show"
+      render :show
     end
   end
 
@@ -44,7 +44,7 @@ class MenusController < ApplicationController
       redirect_to menus_path
     else
       flash[:alert] = "Therer is some issue menu not deleted"
-      render :action => "index"
+      render :index
     end
   end
 
@@ -55,6 +55,9 @@ class MenusController < ApplicationController
   end
 
   def permit_params
-    params.require(:menu).permit(:name, :resturant_id, addon_ids: [])
+    params.require(:menu).permit(
+      :name,
+      :resturant_id,
+      addon_ids: [])
   end
 end
