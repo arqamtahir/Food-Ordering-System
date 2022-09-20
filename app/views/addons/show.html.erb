@@ -33,8 +33,8 @@
                     class: 'btn btn-sm btn-danger' %>
                 </td>
 
-                <% if  @addon.menus.any?%>
-                  <td><%= render @addon.menus %></td>
+                <% if  @addon.menu_items.any?%>
+                  <td><%= render @addon.menu_items%></td>
                 <% end %>
 							</tr>
             </tbody>
