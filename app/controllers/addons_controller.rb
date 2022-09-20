@@ -3,7 +3,7 @@ class AddonsController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
     def index
-      @addons=Addon.all
+      @addons=current_employee.resturant.addons
     end
 
     def show
@@ -61,6 +61,7 @@ class AddonsController < ApplicationController
         :description,
         :price,
         :post_status,
-        menu_ids: [])
+        :resturant_id,
+        menu_item_ids: [])
     end
 end
