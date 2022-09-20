@@ -57,7 +57,6 @@ class MenusController < ApplicationController
   def permit_params
     params.require(:menu).permit(
       :name,
-      :resturant_id,
-      addon_ids: [])
+      :resturant_id)
   end
 end
