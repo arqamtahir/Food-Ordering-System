@@ -6,14 +6,6 @@
 			<%= f.label :name, class: "col-2 col-form-label" %>
 			<%= f.text_field :name, class: "form-control input-rounded shadow rounded", placeholder: "name of menu" %>          
 		</div>
-
-		<div class="form-group">
-			<%= f.label :select_addons , class: "col-3 col-form-labeclass "%>
-
-			<%= f.collection_check_boxes :addon_ids, Addon.all, :id, :name ,
-					{},
-					{class:"custom-control custom-checkbox form-check", multiple: true} %>
-		</div>
 		
 		<div class="card-footer">
 			<%= f.submit class: "btn btn-primary" %>
