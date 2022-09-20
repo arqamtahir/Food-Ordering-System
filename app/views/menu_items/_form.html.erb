@@ -1,0 +1,45 @@
+<div class="card-body">
+	<%= form_with(model: menu_item, class: "shadow p-3 mb-3 rounded", local: true) do |f| %>
+	  <%= f.hidden_field :resturant_id, value: current_employee.resturant_id %>
+
+		<div class="form-group">
+			<%= f.label :name, class: "col-2 col-form-label" %>
+			<%= f.text_field :name, class: "form-control input-rounded shadow rounded", placeholder: "name of Menu Item" %>          
+		</div>
+
+		<div class="form-group">
+			<%= f.label :description , class: "col-3 col-form-label"%>
+			<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of Menu Item", autocomplete: "name" %>
+		</div>
+
+		<div class="form-group">
+			<%=f.label :post_status, "Menu Item Status" %>
+			<%= f.select(:post_status, MenuItem.post_statuses.keys) %>
+		</div>
+
+		<div class="form-group">
+			<%=f.label :menu_itemable_type, "Menu Item Type" %>
+			<%= f.select(:menu_itemable_type, MenuItem.post_statuses.keys) %>
+		</div>
+
+		<div class="form-group">
+			<%=f.label :menu_itemable_id, "Menu Item Id" %>
+			<%= f.select(:menu_itemable_id, MenuItem.post_statuses.keys) %>
+		</div>
+
+
+    
+    <div class="form-group">
+			<%= f.label :select_addons , class: "col-3 col-form-labeclass "%>
+
+			<%= f.collection_check_boxes :addon_ids, current_employee.resturant.addons, :id, :name ,
+          {},
+          {class:"custom-control custom-checkbox form-check", multiple: true} %>
+		</div>
+
+		
+		<div class="card-footer">
+			<%= f.submit class: "btn btn-primary" %>
+		</div>
+	<% end %>
+</div>
