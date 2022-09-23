@@ -1,8 +1,19 @@
-<div class="row page-content container-fluid">
-  <div class="col-md-6">
-    <div class="card">
-      <h2 class="card-header">Edit Menu</h2>
-		    <%= render  "form", menu: @menu %>
+<div id="app">
+  <%= render 'dashboard/sidebar' %>
+  
+  <div class="content-wrapper">
+    <%= render 'dashboard/toggle_nav' %>
+    <%= render 'dashboard/navbar' %>
+    
+    <div class="content">
+      <%= render 'dashboard/header' %>
+
+      <div class="row page-content container-fluid">
+        <div class="card">
+          <h2 class="card-header">Edit Menus</h2>
+          <%= render  "form", menu: @menu %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
