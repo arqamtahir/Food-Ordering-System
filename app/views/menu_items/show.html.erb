@@ -1,51 +1,13 @@
-<section class="page-content container-fluid">
-  <div class="row">
-    <div class="col-9">
-      <div class="card">
-        <h5 class="card-header">Menu_items</h5>
-
-        <div class="card-body">
-          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Menu Item Type</th>
-                <th>Menu Item ID</th>
-                <th>Action</th>
-                <th>Addons</th>
-              </tr>
-            </thead>
-
-            <tbody>
-							<tr>
-								<td><%=@menu_item.id%></td>
-								<td><%=@menu_item.name%></td>
-								<td><%=@menu_item.description%></td>
-								<td><%=@menu_item.post_status%></td>
-								<td><%=@menu_item.menu_itemable_type%></td>
-								<td><%=@menu_item.menu_itemable_id%></td>
-                
-                <td>
-                  <%= link_to "edit ",edit_menu_item_path(@menu_item),
-                    class: "btn btn-sm btn-warning"%>
-                  <%= link_to "delete",menu_item_path(@menu_item) ,method: :delete, data: {confirm: 'Are you sure?'},
-                    class: 'btn btn-sm btn-danger' %>
-                </td>
-
-                <% if  @menu_item.addons.any?%>
-                  <td><%= render @menu_item.addons %></td>
-                <% end %>
-							</tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<div id="app">
+  <%= render 'dashboard/sidebar' %>
+  
+  <div class="content-wrapper">
+    <%= render 'dashboard/toggle_nav' %>
+    <%= render 'dashboard/navbar' %>
     
-    <%= link_to 'Back', menu_items_path, class: "btn btn-primary btn-warning" %>
-
+    <div class="content">
+      <%= render 'dashboard/header' %>
+      <%= render 'show_page'%>
+    </div>
   </div>
-</section>
+</div>
