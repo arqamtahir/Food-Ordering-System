@@ -66,6 +66,25 @@
           </ul>
         </li>
 
+        <li class="nav-dropdown active">
+          <a class="has-arrow" href="javascript:void(0)" aria-expanded="false">
+            <i class="icon dripicons-meter" id="sidebar-text"></i>
+            <span>Menu Items</span>
+          </a>
+          
+          <ul class="collapse nav-sub" aria-expanded="true">
+            <li class="active">
+              <%= link_to  "Show menu items", menu_items_path %>
+            </li>
+          </ul>
+
+          <ul class="collapse nav-sub" aria-expanded="true">
+            <li class="active">
+              <%= link_to  "Add new menu item", new_menu_item_path %>
+            </li>
+          </ul>
+        </li>
+
         <li class="nav-dropdown">
           <a class="has-arrow" href="#" aria-expanded="false">
             <i class="icon dripicons-article"></i>
