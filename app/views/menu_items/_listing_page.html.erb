@@ -1,0 +1,52 @@
+<section class="page-content container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class= "row">
+          <h1 class="card-header col-10 ml-2">Menu Items</h1>        
+          
+          <%= link_to new_menu_item_path,class:"btn btn-danger btn-outline btn-floating btn-rounded mt-2" do %>
+            <span>+ Add Menu Item</span>
+          <% end %>
+        </div>
+
+        <div class="card-body ">
+          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @menu_items.each do |menu_item| %>
+                <tr>
+                  <td><%=menu_item.id%></td>
+                  <td><%=menu_item.name%></td>
+                  <td><%=menu_item.post_status%></td>
+
+                  <td>
+                    <%= link_to edit_menu_item_path(menu_item) do%>
+                      <i class="la la-pencil-square btn btn-secondary btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                    
+                    <%= link_to menu_item_path(menu_item) do%>
+                      <i class="la la-eye btn btn-success btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                    
+                    <%= link_to menu_item_path(menu_item), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                      <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                  </td>
+                </tr>
+							<% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+<section class="page-content container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class= "row">
+          <h1 class="card-header col-9 ml-2">Menu Item</h1>        
+          
+          <%= link_to menu_items_path,class:"btn btn-secondary btn-outline btn-floating btn-rounded mt-2" do %>
+            <span> < Back to Menu Items</span>
+          <% end %>
+        </div>
+
+        <div class="card-body">
+          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Menu Item Type</th>
+                <th>Menu Item ID</th>
+                <th>Action</th>
+                <th>Addons</th>
+              </tr>
+            </thead>
+
+            <tbody>
+							<tr>
+								<td><%=@menu_item.id%></td>
+								<td><%=@menu_item.name%></td>
+								<td><%=@menu_item.description%></td>
+								<td><%=@menu_item.post_status%></td>
+								<td><%=@menu_item.menu_itemable_type%></td>
+								<td><%=@menu_item.menu_itemable_id%></td>
+                
+                <td>
+                  <%= link_to edit_menu_item_path(@menu_item) do%>
+                    <i class="la la-pencil-square btn btn-secondary btn-outline btn-sm btn-floating btn-rounded"></i>
+                  <% end %>
+
+                  <%= link_to menu_item_path(@menu_item), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                    <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                  <% end %>
+                </td>
+
+                <% if  @menu_item.addons.any?%>
+                  <td><%= render @menu_item.addons %></td>
+                <% end %>
+							</tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
