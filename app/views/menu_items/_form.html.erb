@@ -1,45 +1,75 @@
 <div class="card-body">
-	<%= form_with(model: menu_item, class: "shadow p-3 mb-3 rounded", local: true) do |f| %>
-	  <%= f.hidden_field :resturant_id, value: current_employee.resturant_id %>
+	<ul class="nav nav-pills nav-pills-primary mb-3" id="pills-demo-1" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true">Menu Item details</a>
+		</li>
 
-		<div class="form-group">
-			<%= f.label :name, class: "col-2 col-form-label" %>
-			<%= f.text_field :name, class: "form-control input-rounded shadow rounded", placeholder: "name of Menu Item" %>          
-		</div>
+		<li class="nav-item">
+			<a class="nav-link" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false">Select </a>
+		</li>
 
-		<div class="form-group">
-			<%= f.label :description , class: "col-3 col-form-label"%>
-			<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of Menu Item", autocomplete: "name" %>
-		</div>
+		<li class="nav-item">
+			<a class="nav-link" id="pills-3-tab" data-toggle="pill" href="#pills-3" role="tab" aria-controls="pills-3" aria-selected="false">Select Addons</a>
+		</li>
+	</ul>
+	
+	<%= form_with(model: menu_item, class: "shadow p-3 mb-3 rounded form", local: true) do |f| %>
+		<div class="tab-content" id="pills-tabContent-1">
+			<div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1">
+				<div class="card-body">
+					<%= f.hidden_field :resturant_id, value: current_employee.resturant_id %>
 
-		<div class="form-group">
-			<%=f.label :post_status, "Menu Item Status" %>
-			<%= f.select(:post_status, MenuItem.post_statuses.keys) %>
-		</div>
+					<div class="form-group">
+						<%= f.label :name, class: "col-2 col-form-label" %>
+						<%= f.text_field :name, class: "form-control input-rounded shadow rounded", placeholder: "name of Menu Item" %>          
+					</div>
 
-		<div class="form-group">
-			<%=f.label :menu_itemable_type, "Menu Item Type" %>
-			<%= f.select(:menu_itemable_type, MenuItem.post_statuses.keys) %>
-		</div>
+					<div class="form-group">
+						<%= f.label :description , class: "col-3 col-form-label"%>
+						<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of Menu Item", autocomplete: "name" %>
+					</div>
 
-		<div class="form-group">
-			<%=f.label :menu_itemable_id, "Menu Item Id" %>
-			<%= f.select(:menu_itemable_id, MenuItem.post_statuses.keys) %>
-		</div>
+					<div class="form-group">
+						<%=f.label :post_status, "Menu Item Status" %>
+						<%= f.select(:post_status, MenuItem.post_statuses.keys) %>
+					</div>
+				</div>
+			</div>
 
+			
+			<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2">
+				<%= f.radio_button :item_select, "deal", checked: "checked", onClick: "dealSwitcher()"	%>
+				<%= f.label :deal_select, "Choose from deal" %>
+				<%= f.radio_button :item_select, "group_item",  onClick: "groupItemSwitcher()" %>
+				<%= f.label :group_select, "Choose from group item" %>
+				
+				<div class="form-group deal" id="deal">
+					<%=f.label :menu_itemable_type, "Menu Item Type" %>
+					<%= f.collection_check_boxes :menu_itemable_type, Deal.all, :id, :name, class:"control-primary control--checkbox control__indicator control control-outline "%>
 
-    
-    <div class="form-group">
-			<%= f.label :select_addons , class: "col-3 col-form-labeclass "%>
+				</div>
+				
+				<div class="form-group group_item d-none" id="grp-item">
+					<%=f.label :menu_itemable_id, "Menu Item Id" %>
+					<%= f.select(:menu_itemable_id, GroupItem.all) %>
+				</div>						
+			</div>
 
-			<%= f.collection_check_boxes :addon_ids, current_employee.resturant.addons, :id, :name ,
-          {},
-          {class:"custom-control custom-checkbox form-check", multiple: true} %>
-		</div>
+			<div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3">
+				<div class="form-group">
+					<%= f.label :select_addons , class: "badge badge-pill badge-secondary mb-3"%>
+					
+					<div class="collection ml-4">
+						<%= f.collection_check_boxes :addon_ids, current_employee.resturant.addons, :id, :name ,
+								{},
+								{class:"control-primary control--checkbox control__indicator control control-outline ", multiple: true} %>
+					</div>
+				</div>
 
-		
-		<div class="card-footer">
-			<%= f.submit class: "btn btn-primary" %>
+				<div class="card-footer">
+					<%= f.submit class: "btn btn-danger btn-floating btn-prime " %>
+				</div>
+			</div>
 		</div>
 	<% end %>
 </div>
