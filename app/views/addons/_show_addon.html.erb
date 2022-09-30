@@ -5,8 +5,8 @@
         <div class= "row">
           <h1 class="card-header col-10 ml-2">Addons</h1>        
           
-          <%= link_to addons_path, class:"btn btn-secondary btn-outline btn-floating btn-rounded mt-2" do %>
-            <span> < Back to Addons</span>
+          <%= link_to addons_path, class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+            <span> Back to Addons</span>
           <% end %>
         </div>
 
@@ -34,7 +34,7 @@
                 
                 <td>
                   <%= link_to edit_addon_path(@addon) do%>
-                    <i class="la la-pencil-square btn btn-secondary btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
                   <% end %>
 
                   <%= link_to addon_path(@addon), method: :delete, data: {confirm: 'Are you sure?'} do%>

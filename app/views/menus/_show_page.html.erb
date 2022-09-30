@@ -1,12 +1,12 @@
 <section class="page-content container-fluid">
   <div class="row">
     <div class="col-12">
-      <div class="card">
+      <div class="card shadow p-3 mb-3 rounded form">
         <div class= "row">
           <h1 class="card-header col-9 ml-2">Menu</h1>        
           
-          <%= link_to menus_path,class:"btn btn-secondary btn-outline btn-floating btn-rounded mt-2" do %>
-            <span> < Back to Menu</span>
+          <%= link_to menus_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+            <span> Back to Menu</span>
           <% end %>
         </div>
 
@@ -27,7 +27,7 @@
                 
                 <td>
                   <%= link_to edit_menu_path(@menu) do%>
-                    <i class="la la-pencil-square btn btn-secondary btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
                   <% end %>
                   
                   <%= link_to menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} do%>
