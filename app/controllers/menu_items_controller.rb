@@ -3,7 +3,25 @@ class MenuItemsController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
     def index
-      @menu_items=MenuItem.all
+      if params.key?(:status)
+        if params[:status] == "available"
+          @q =  MenuItem.ransack(params[:q])
+          @menu_items = @q.result(distinct: true).where(post_status: 1)
+        end 
+        
+        if params[:status] == "unavailable"
+          @q =  MenuItem.ransack(params[:q])
+          @menu_items = @q.result(distinct: true).where(post_status: 2)
+        end
+
+        if params[:status] == "all"
+          @q =  MenuItem.ransack(params[:q])
+          @menu_items = @q.result(distinct: true)
+        end
+      else
+        @q =  MenuItem.ransack(params[:q])
+        @menu_items = @q.result(distinct: true)
+      end
     end
 
     def show
