@@ -1,4 +1,5 @@
 class FoodItem < ApplicationRecord
+    included Availability
     enum post_status: { available: 1,  unavailable: 2 }
 
     has_many :option_items
