@@ -1,7 +1,7 @@
 <section class="page-content container-fluid">
   <div class= "row float-right ml-auto mb-2 mr-3">          
-    <%= link_to new_menu_item_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
-      <span>+ Add Menu Item</span>
+    <%= link_to new_group_item_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+      <span>+ Add Group Item</span>
     <% end %>
   </div>
   
@@ -10,20 +10,20 @@
       <div class="card shadow p-3 mb-3 rounded form">        
         <div class= "row">
           <div class="col-6">
-            <h1 class="card-header ml-2">Menu Items</h1>          
+            <h1 class="card-header ml-2">Group Items</h1>          
           </div>
           
           <div class= " row float-right ml-auto mt-2 mr-3">
             <div class= "">
-              <%= link_to 'available', menu_items_path(status: "available") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+              <%= link_to 'available', group_items_path(status: "available") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
             </div>
             
             <div class= "">
-              <%= link_to 'unavailable', menu_items_path(status: "unavailable") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+              <%= link_to 'unavailable', group_items_path(status: "unavailable") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
             </div>
             
             <div class= "">
-              <%= link_to 'All', menu_items_path(status: "all") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+              <%= link_to 'All', group_items_path(status: "all") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
             </div>
           </div>
         </div>
@@ -40,22 +40,22 @@
             </thead>
 
             <tbody>
-              <% @menu_items.each do |menu_item| %>
+              <% @group_items.each do |group_item| %>
                 <tr>
-                  <td><%=menu_item.id%></td>
-                  <td><%=menu_item.name%></td>
-                  <td><%=menu_item.post_status%></td>
+                  <td><%=group_item.id%></td>
+                  <td><%=group_item.name%></td>
+                  <td><%=group_item.post_status%></td>
 
                   <td>
-                    <%= link_to edit_menu_item_path(menu_item) do%>
+                    <%= link_to edit_group_item_path(group_item) do%>
                       <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
                     <% end %>
                     
-                    <%= link_to menu_item_path(menu_item) do%>
+                    <%= link_to group_item_path(group_item) do%>
                       <i class="la la-eye btn btn-success btn-outline btn-sm btn-floating btn-rounded"></i>
                     <% end %>
                     
-                    <%= link_to menu_item_path(menu_item), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                    <%= link_to group_item_path(group_item), method: :delete, data: {confirm: 'Are you sure?'} do%>
                       <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
                     <% end %>
                   </td>

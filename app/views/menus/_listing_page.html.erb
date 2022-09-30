@@ -1,15 +1,19 @@
 <section class="page-content container-fluid">
+  <div class= "row float-right ml-auto mb-2 mr-3">          
+    <%= link_to new_menu_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+      <span>+ Add Menu Item</span>
+    <% end %>
+  </div>
+  
   <div class="row">
     <div class="col-12">
-      <div class="card">
+      <div class="card shadow p-3 mb-3 rounded form">        
         <div class= "row">
-          <h1 class="card-header col-10 ml-2">Menu</h1>        
-          
-          <%= link_to new_menu_path,class:"btn btn-danger btn-outline btn-floating btn-rounded mt-2" do %>
-            <span>+ Add Menu</span>
-          <% end %>
+          <div class="col-6">
+            <h1 class="card-header ml-2">Menus</h1>          
+          </div>
         </div>
-
+        
         <div class="card-body ">
           <table id="bs4-table" class="table table-striped table-bordered table-round" style="width:100%">
             <thead>
@@ -28,7 +32,7 @@
                   
                   <td>
                     <%= link_to edit_menu_path(menu) do%>
-                      <i class="la la-pencil-square btn btn-secondary btn-outline btn-sm btn-floating btn-rounded"></i>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
                     <% end %>
                     
                     <%= link_to menu_path(menu) do%>
