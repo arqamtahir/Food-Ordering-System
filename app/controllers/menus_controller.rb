@@ -3,7 +3,8 @@ class MenusController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
   def index
-    @menus=current_employee.resturant.menus
+    @q =  current_employee.resturant.menus.ransack(params[:q])
+    @menus = @q.result(distinct: true)
   end
 
   def show
@@ -20,7 +21,7 @@ class MenusController < ApplicationController
     @menu=Menu.new(permit_params)
     if @menu.save
       flash[:notice] = "menu created successfully"
-      redirect_to menus_path
+      redirect_to menus_path, notice: "menu created successfully"
     else
       flash[:alert] = "Therer is some issue menu not created"
       render :new
