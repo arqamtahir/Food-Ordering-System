@@ -1,13 +1,31 @@
 <section class="page-content container-fluid">
+  <div class= "row float-right ml-auto mb-2 mr-3">          
+    <%= link_to new_addon_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+      <span>+ Add Addon</span>
+    <% end %>
+  </div>
+  
   <div class="row">
     <div class="col-12">
-      <div class="card">
+      <div class="card shadow p-3 mb-3 rounded form">        
         <div class= "row">
-          <h1 class="card-header col-10 ml-2">Addons</h1>        
+          <div class="col-6">
+            <h1 class="card-header ml-2">Addons</h1>          
+          </div>
           
-          <%= link_to new_addon_path,class:"btn btn-danger  btn-outline btn-floating btn-rounded mt-2 texthover" do %>
-            <span>+ Add Addon</span>
-          <% end %>
+          <div class= " row float-right ml-auto mt-2 mr-3">
+            <div class= "">
+              <%= link_to 'available', addons_path(status: "available") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+            </div>
+            
+            <div class= "">
+              <%= link_to 'unavailable', addons_path(status: "unavailable") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+            </div>
+            
+            <div class= "">
+              <%= link_to 'All', addons_path(status: "all") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+            </div>
+          </div>
         </div>
         
         <div class="card-body ">
@@ -35,7 +53,7 @@
 
                    <td>
                     <%= link_to edit_addon_path(addon) do%>
-                      <i class="la la-pencil-square btn btn-secondary btn-outline btn-sm btn-floating btn-rounded"></i>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
                     <% end %>
                     
                     <%= link_to addon_path(addon) do%>
@@ -55,3 +73,7 @@
     </div>
   </div>
 </section>
+
+
+
+
