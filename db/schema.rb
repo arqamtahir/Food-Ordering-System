@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_20_061239) do
+ActiveRecord::Schema.define(version: 2022_09_29_052516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,8 @@ ActiveRecord::Schema.define(version: 2022_09_20_061239) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_item_id", null: false
+    t.index ["group_item_id"], name: "index_food_items_on_group_item_id"
   end
 
   create_table "group_items", force: :cascade do |t|
@@ -206,13 +208,6 @@ ActiveRecord::Schema.define(version: 2022_09_20_061239) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "group_items_options", id: false, force: :cascade do |t|
-    t.bigint "option_id", null: false
-    t.bigint "group_item_id", null: false
-    t.index ["group_item_id", "option_id"], name: "index_group_items_options_on_group_item_id_and_option_id"
-    t.index ["option_id", "group_item_id"], name: "index_group_items_options_on_option_id_and_group_item_id"
   end
 
   create_table "menu_items", force: :cascade do |t|
@@ -262,6 +257,8 @@ ActiveRecord::Schema.define(version: 2022_09_20_061239) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_item_id", null: false
+    t.index ["group_item_id"], name: "index_options_on_group_item_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -388,9 +385,11 @@ ActiveRecord::Schema.define(version: 2022_09_20_061239) do
   add_foreign_key "discount_timings", "discounts"
   add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "employees", "resturants"
+  add_foreign_key "food_items", "group_items"
   add_foreign_key "menus", "resturants"
   add_foreign_key "option_items", "food_items"
   add_foreign_key "option_items", "options"
+  add_foreign_key "options", "group_items"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "employees"
   add_foreign_key "orders", "promo_tokens"
