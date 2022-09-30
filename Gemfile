@@ -24,6 +24,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'activeadmin'
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
+#cocoon gem for nested attributes
+gem "cocoon"
+#ransack for search
+gem 'ransack'
 
 
 # Use Active Storage variant
