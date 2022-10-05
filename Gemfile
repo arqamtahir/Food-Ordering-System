@@ -28,6 +28,9 @@ gem 'devise_invitable', '~> 2.0.0'
 gem "cocoon"
 #ransack for search
 gem 'ransack'
+# discard for soft delete
+gem 'discard', '~> 1.2'
+
 
 
 # Use Active Storage variant
