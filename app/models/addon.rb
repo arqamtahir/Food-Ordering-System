@@ -1,4 +1,6 @@
 class Addon < ApplicationRecord
+    include Discard::Model
+
     included Availability
     enum post_status: { available: 1,  unavailable: 2 }
 
