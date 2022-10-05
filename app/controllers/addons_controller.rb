@@ -45,8 +45,11 @@ class AddonsController < ApplicationController
     end
 
     def destroy
-      if @addon.destroy
+      if @addon.discarded?
         flash[:notice] = "addon deleted successfully"
+        redirect_to addons_path      
+      elsif @addon.discard
+        flash[:notice] = "addon moved to recycle bin, successfully"
         redirect_to addons_path
       else
         flash[:alert] = "Therer is some issue addon not deleted"
