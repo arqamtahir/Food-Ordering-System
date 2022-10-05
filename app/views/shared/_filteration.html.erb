@@ -1,0 +1,18 @@
+<%= search_form_for @q ,class: "col-6" do |f| %>
+  <div class= " row float-right ml-auto mt-2 mr-3">
+    <%= f.hidden_field :available , id: "procurable_item" %>
+    <%= f.hidden_field :unavailable , id: "unprocurable_item" %>
+  
+    <div class= "">
+      <%=f.button "All", type: "submit", id:"both_status", class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+    </div>
+
+    <div class= "">
+      <%=f.button "Available", type: "submit", id:"procurable", class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+    </div>
+
+    <div class= "">
+      <%=f.button "Unavailable", type: "submit", id:"unprocurable", class: "btn btn-info btn-rounded btn-floating btn-outline" %>
+    </div>
+  </div>
+<% end %>
