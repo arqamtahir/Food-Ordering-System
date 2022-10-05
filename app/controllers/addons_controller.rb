@@ -3,24 +3,11 @@ class AddonsController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
     def index
-      if params.key?(:status)
-        if params[:status] == "available"
-          @q =  current_employee.resturant.addons.ransack(params[:q])
-          @addons = @q.result(distinct: true).where(post_status: 1)
-        end 
-        
-        if params[:status] == "unavailable"
-          @q =  current_employee.resturant.addons.ransack(params[:q])
-          @addons = @q.result(distinct: true).where(post_status: 2)
-        end
-
-        if params[:status] == "all"
-          @q =  current_employee.resturant.addons.ransack(params[:q])
-          @addons = @q.result(distinct: true)
-        end
-      else
-        @q =  current_employee.resturant.addons.ransack(params[:q])
-        @addons = @q.result(distinct: true)
+      @q =  current_employee.resturant.addons.ransack(params[:q])
+      @addons = @q.result(distinct: true)
+      
+      if(params[:q].blank?)
+        @addons = @q.result(distinct: true).available
       end
     end
 
