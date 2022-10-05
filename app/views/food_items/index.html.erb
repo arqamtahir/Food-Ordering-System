@@ -1,0 +1,6 @@
+<%= render 'listing_page'%>
+<%= render 'food_item_search' %>
+
+<%= content_for :js do%>
+  Filter.availability()
+<%end%>
