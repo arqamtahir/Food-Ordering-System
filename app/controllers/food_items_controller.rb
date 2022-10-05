@@ -3,24 +3,11 @@ class FoodItemsController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
   def index
-    if params.key?(:status)
-      if params[:status] == "available"
-        @q =  FoodItem.ransack(params[:q])
-        @food_items = @q.result(distinct: true).where(post_status: 1)
-      end 
-      
-      if params[:status] == "unavailable"
-        @q =  FoodItem.ransack(params[:q])
-        @food_items = @q.result(distinct: true).where(post_status: 2)
-      end
-
-      if params[:status] == "all"
-        @q =  FoodItem.ransack(params[:q])
-        @food_items = @q.result(distinct: true)
-      end
-    else
-      @q =  FoodItem.ransack(params[:q])
-      @food_items = @q.result(distinct: true)
+    @q =  FoodItem.ransack(params[:q])
+    @food_items = @q.result(distinct: true)
+    
+    if params[:q].blank? 
+      @food_items = @q.result(distinct: true).available
     end
   end
 
