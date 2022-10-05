@@ -12,20 +12,8 @@
           <div class="col-6">
             <h1 class="card-header ml-2">Addons</h1>          
           </div>
-          
-          <div class= " row float-right ml-auto mt-2 mr-3">
-            <div class= "">
-              <%= link_to 'available', addons_path(status: "available") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
-            </div>
-            
-            <div class= "">
-              <%= link_to 'unavailable', addons_path(status: "unavailable") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
-            </div>
-            
-            <div class= "">
-              <%= link_to 'All', addons_path(status: "all") , class: "btn btn-info btn-rounded btn-floating btn-outline" %>
-            </div>
-          </div>
+          <%# render partial for filteration %>
+          <%= render "shared/filteration"%>
         </div>
         
         <div class="card-body ">
@@ -73,7 +61,3 @@
     </div>
   </div>
 </section>
-
-
-
-
