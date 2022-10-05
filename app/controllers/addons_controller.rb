@@ -4,10 +4,10 @@ class AddonsController < ApplicationController
 
     def index
       @q =  current_employee.resturant.addons.ransack(params[:q])
-      @addons = @q.result(distinct: true)
+      @addons = @q.result(distinct: true).kept
       
       if(params[:q].blank?)
-        @addons = @q.result(distinct: true).available
+        @addons = @q.result(distinct: true).available.kept
       end
     end
 
