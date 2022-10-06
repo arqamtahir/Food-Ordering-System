@@ -1,13 +1,13 @@
 class FoodItemsController < ApplicationController
-  before_action :set_food_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_food_item, only: [:show, :edit, :update, :destroy, :restore]
   before_action :permit_params, only: [:update, :create]
 
   def index
     @q =  FoodItem.ransack(params[:q])
-    @food_items = @q.result(distinct: true)
+    @food_items = @q.result(distinct: true).kept
     
     if params[:q].blank? 
-      @food_items = @q.result(distinct: true).available
+      @food_items = @q.result(distinct: true).available.kept
     end
   end
 
@@ -44,15 +44,29 @@ class FoodItemsController < ApplicationController
     end
   end
 
-  def destroy
-    if @food_item.destroy
-      flash[:notice] = "food_item deleted successfully"
-      redirect_to food_items_path
-    else
-      flash[:alert] = "Therer is some issue food_item not deleted"
-      render :action => "index"
+    def destroy
+      if @food_item.discarded?
+        flash[:notice] = "food item deleted successfully"
+        redirect_to food_items_path      
+      elsif @food_item.discard
+        flash[:notice] = "food item moved to recycle bin, successfully"
+        redirect_to food_items_path
+      else
+        flash[:alert] = "Therer is some issue food_item not deleted"
+        render :action => "index"
+      end
     end
-  end
+
+    def discarded
+      @q = FoodItem.ransack(params[:q])
+      @food_items = @q.result(distinct: true).discarded
+    end
+
+    def restore
+      @food_item.undiscard
+        flash[:notice] = "food item restore successfully"
+        redirect_to food_items_path(@food_item)  
+    end
 
   private
 
