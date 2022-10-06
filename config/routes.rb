@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   devise_for :employees, controllers: { invitations: 'employees/invitations' }
   devise_for :customers
   resources :food_items
-  resources :addons
+  resources :addons do 
+    get :discarded , on: :collection 
+    get :restore , on: :member 
+  end
   resources :group_items , shallow: true do
     resources :options 
   end
