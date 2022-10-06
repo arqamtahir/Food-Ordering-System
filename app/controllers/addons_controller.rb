@@ -1,5 +1,5 @@
 class AddonsController < ApplicationController
-  before_action :set_addon, only: [:show, :edit, :update, :destroy]
+  before_action :set_addon, only: [:show, :edit, :update, :destroy, :restore]
   before_action :permit_params, only: [:update, :create]
 
     def index
@@ -34,7 +34,7 @@ class AddonsController < ApplicationController
 
     end
 
-    def update
+    def update      
 			if @addon.update(permit_params)
         flash[:notice] = "addon updated successfully"
         redirect_to addons_path(@addon)
@@ -55,6 +55,17 @@ class AddonsController < ApplicationController
         flash[:alert] = "Therer is some issue addon not deleted"
         render :action => "index"
       end
+    end
+
+    def discarded
+      @q =  current_employee.resturant.addons.ransack(params[:q])
+      @addons = @q.result(distinct: true).discarded
+    end
+
+    def restore
+      @addon.undiscard
+        flash[:notice] = "addon restore successfully"
+        redirect_to addons_path(@addon)  
     end
 
     private
