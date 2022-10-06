@@ -19,8 +19,8 @@
                 <th>Description</th>
                 <th>Price</th>
                 <th>Status</th>
-                <th>Action</th>
                 <th>menus</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -32,19 +32,30 @@
 								<td><%=@addon.price%></td>
 								<td><%=@addon.post_status%></td>
                 
-                <td>
-                  <%= link_to edit_addon_path(@addon) do%>
-                    <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
-                  <% end %>
-
-                  <%= link_to addon_path(@addon), method: :delete, data: {confirm: 'Are you sure?'} do%>
-                    <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
-                  <% end %>
-                </td>
-
                 <% if  @addon.menu_items.any?%>
                   <td><%= render @addon.menu_items%></td>
+                <% else %>
+                  <td>Nil</td>
                 <% end %>
+                
+                <td>
+                  <% if  @addon.discarded? %>
+                    <%= link_to "Restore",  restore_addon_path(@addon),
+                      class:"btn btn-info btn-outline btn-sm btn-floating btn-rounded"%>
+                  <% else %>
+                    <%= link_to edit_addon_path(@addon) do%>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>                    
+                  <% end %>
+
+                  <% if  @addon.discarded? %>
+                    <%= link_to "Permanent delete", addon_path(@addon), class:"btn btn-danger btn-outline btn-sm btn-floating btn-rounded", method: :delete, data: {confirm: 'Are you sure to delete it permanently?'} %>
+                  <% else %>
+                    <%= link_to addon_path(@addon), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                      <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>              
+                  <% end %>
+                </td>
 							</tr>
             </tbody>
           </table>
