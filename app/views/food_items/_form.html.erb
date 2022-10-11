@@ -18,7 +18,7 @@
 			<div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1">
 				<div class="form-group">
 					<%= f.label :Select_Category , class: "col-3 col-form-label"%>
-					<%= f.collection_select :group_item_id , GroupItem.order(:name), :id, :name, {include_blank: true}, {class: "form-control input-rounded shadow rounded category_select "} %>
+					<%= f.collection_select :group_item_id , GroupItem.order(:name), :id, :name, {:prompt => 'Choose a Category...'}, {class: "form-control input-rounded shadow rounded category_select "} %>
 					<%# <%= f.select :events, GroupItem.all.collect{|cat| [cat.name, cat.id]}, label_method: :event_name_and_date, input_html: {multiple: true, id: "category_select"} %>
 					<%# <%= select_tag (:group_item_id, options_for_select(GroupItem.all.collect{|cat| [cat.name, cat.id]})) %>
 				</div>
