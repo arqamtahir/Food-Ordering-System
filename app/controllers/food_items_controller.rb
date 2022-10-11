@@ -15,6 +15,10 @@ class FoodItemsController < ApplicationController
   end
 
   def new
+    # render json: { html: render_to_string(partial: 'options') }
+    @items_list = {}
+    GroupItem.all.map { |item| @items_list[item.name] = item.options }
+    @items_list = @items_list.to_json
     @food_item=FoodItem.new
   end
 
@@ -66,6 +70,14 @@ class FoodItemsController < ApplicationController
       @food_item.undiscard
         flash[:notice] = "food item restore successfully"
         redirect_to food_items_path(@food_item)  
+    end
+
+    def select_option
+      @select_option = GroupItem.find(params[:c_name]).options
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
   private
