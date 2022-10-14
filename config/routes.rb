@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :employees, controllers: { invitations: 'employees/invitations' }
   devise_for :customers
+  
+  get "/select_option", to: "food_items#select_option"
 
   resources :food_items do
     get :discarded , on: :collection 
