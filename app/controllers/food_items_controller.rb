@@ -73,10 +73,25 @@ class FoodItemsController < ApplicationController
     end
 
     def select_option
-      @select_option = GroupItem.find(params[:c_name]).options
-      respond_to do |format|
-        format.html
-        format.js
+      @group_item = GroupItem.find(params[:group_item_id])
+      @form_id = params[:form_id]
+      @select_option = @group_item.options
+      @total_options = @select_option.count
+      # @select_option = @group_item.options.name
+      @group_item = @group_item.name
+      
+      if @select_option
+        respond_to do |format|
+          format.js { render partial: 'food_items/select_option', locals: {
+            total_options:  @total_options,
+            group_item: @group_item,
+            select_option: @select_option,
+            form_id: @form_id}
+          }
+        end
+      else 
+        flash[:alert] = "There is some issue please try again"
+        redirect_to food_items_path
       end
     end
 
@@ -91,6 +106,12 @@ class FoodItemsController < ApplicationController
       :name,
       :description,
       :post_status,
-      :group_item_id)
+      :group_item_id,
+      option_items_attributes: [
+        :id, 
+        :price,
+        :food_item_id,
+        :option_id,
+        :_destroy])
   end
 end
