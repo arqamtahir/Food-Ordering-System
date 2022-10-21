@@ -27,7 +27,6 @@ class FoodItemsController < ApplicationController
 
   def create
     @food_item=FoodItem.new(permit_params)
-    
     if @food_item.save
       flash[:notice] = "Food Item created successfully"
       redirect_to food_items_path
@@ -107,10 +106,10 @@ class FoodItemsController < ApplicationController
       :description,
       :post_status,
       :group_item_id,
+      :discount_ids[],
       option_items_attributes: [
         :id, 
         :price,
-        :food_item_id,
         :option_id,
         :_destroy])
   end
