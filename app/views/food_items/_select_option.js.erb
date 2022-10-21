@@ -1,9 +1,8 @@
 console.log("running Select_option.js.erb")
-console.log("<%=total_options%>")
-console.log("<%=group_item%>")
 console.log("<%=select_option%>")
-document.querySelector("#options").innerHTML= "kjshdfijifji"
-<% select_option.each do |n| %>
-  console.log("<%=n.name%>")
-  <%end%>
-<%# console.log(opt) %>
+document.getElementById("options").innerHTML= "";
+
+<% select_option.each do |option, index| %>
+  document.getElementById("options").innerHTML += '<%= j render 'select_option.html', o: option, i: index %>'
+<%end%>
+
