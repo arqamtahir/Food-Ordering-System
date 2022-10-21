@@ -1,38 +1,17 @@
 <div class="card-body">
 	<ul class="nav nav-pills nav-pills-primary mb-3" id="pills-demo-1" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true">Select Category </a>
+			<a class="nav-link active" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true">Food Item details</a>
 		</li>
 
 		<li class="nav-item">
-			<a class="nav-link" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false">Food Item details</a>
-		</li>
-
-		<li class="nav-item">
-			<a class="nav-link" id="pills-3-tab" data-toggle="pill" href="#pills-3" role="tab" aria-controls="pills-3" aria-selected="false">Set Option and Price </a>
+			<a class="nav-link" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false">Set Price</a>
 		</li>
 	</ul>
 	
-	<%= form_with model: food_item, class: "shadow p-3 mb-3 rounded form", id: 'food_item_form', local: true do |f| %>
+	<%= form_with model: food_item, html: { class: "shadow p-3 mb-3 rounded form", id: 'food_item_form', data: { local: true } } do |f| %>
 		<div class="tab-content shadow p-3 mb-3 rounded form" id="pills-tabContent-1">
 			<div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1">
-				<div class="form-group">
-					<%= f.label :Select_Category , class: "col-3 col-form-label"%>
-					<%= f.collection_select :group_item_id , GroupItem.order(:name), :id, :name, {:prompt => 'Choose a Category...'}, {class: "form-control input-rounded shadow rounded category_select "} %>
-					<%# <%= f.select :events, GroupItem.all.collect{|cat| [cat.name, cat.id]}, label_method: :event_name_and_date, input_html: {multiple: true, id: "category_select"} %>
-					<%# <%= select_tag (:group_item_id, options_for_select(GroupItem.all.collect{|cat| [cat.name, cat.id]})) %>
-				</div>
-				
-				<div class="form-group options", id="options">
-					<%= f.label :Select_Option , class: "col-3 col-form-label"%>
-					<%= f.grouped_collection_select :group_item_id2 , GroupItem.order(:name), :options, :name, :id, :name, {include_blank: true}, {class: "form-control input-rounded shadow rounded option_select"} %>
-					<%# <%= f.collection_select :id, GroupItem.order(:name),:id ,:name, { include_blank: false }, { class: "btn btn-secondary dropdown-toggle" } %>
-					<%# <%= f.select :group_item_id , GroupItem.all.collect{|cat| [cat.name, cat.id]}, {},  {class: "form-control input-rounded shadow rounded option_select"}%>
-					<%# <%= f.check_box :events_to_include_in_event_pass_1, :collection => ["(previously selected events", "etc"], :as => :check_boxes, include_hidden: false, :input_html => {:multiple => true, id: "option_select"} %>
-				</div>
-			</div>
-
-			<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2">
 				<div class="card-body">
 					<div class="form-group">
 						<%= f.label :name, class: "col-2 col-form-label" %>
@@ -41,17 +20,37 @@
 
 					<div class="form-group">
 						<%= f.label :description , class: "col-3 col-form-label"%>
-						<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of Food Item", autocomplete: "name" %>
+						<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of Food Item", autocomplete: "description" %>
 					</div>
-
-					<div class="form-group">
-						<%=f.label :post_status, "Food Item Status" %>
-						<%= f.select(:post_status, FoodItem.post_statuses.keys) %>
+					
+					<div class="row">
+						<div class="form-group col-5">
+							<%= f.label :Select_Category , class: "col-form-label"%>
+							<%= f.collection_select :group_item_id , GroupItem.order(:name), :id, :name, {:prompt => 'Choose a Category...'}, {class: "form-control input-rounded shadow category_select", disabled: (params[:action] == 'edit')} %>
+						</div>
+						
+						<div class="form-group col-5">
+							<%= f.label :Select_Discounts , class: "col-form-label"%>
+							<%= f.collection_select :discount_ids , Discount.order(:discount_percentage), :id, :discount_percentage, {multiple: true, prompt: 'Choose Discounts...'}, {class: "form-control input-rounded shadow category_select"} %>
+						</div>	
 					</div>
 				</div>
 			</div>
 
-			<div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3">
+			<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2">
+				<div class="form-group options", id="options">
+					<% if f.object.options.present? %>
+						<%f.object.option_items.all.zip(f.object.options).each do |(option_item, options)| %>
+							<%= render 'option_items/edit_form', option_item: option_item, options: options %>
+						<% end %>
+					<% end %>
+				</div>
+
+				<div class="form-group">
+					<%=f.label :post_status, "Food Item Status" %>
+					<%= f.select(:post_status, FoodItem.post_statuses.keys) %>
+				</div>
+
 				<div class="card-footer">
 					<%= f.submit class: "btn btn-info btn-outline btn-floating btn-rounded" %>
 				</div>
@@ -61,5 +60,5 @@
 </div>
 
 <%= content_for :js do%>
-  dashboard.select_change();
+  foodItem.select_change();
 <%end%>
