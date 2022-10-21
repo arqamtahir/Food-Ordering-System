@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :options 
   end
   
+  resources :option_items
+
   resources :menus
   resources :menu_items
   root 'home#index'
