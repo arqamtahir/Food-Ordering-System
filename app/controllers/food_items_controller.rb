@@ -106,7 +106,7 @@ class FoodItemsController < ApplicationController
       :description,
       :post_status,
       :group_item_id,
-      :discount_ids[],
+      discount_ids: [],
       option_items_attributes: [
         :id, 
         :price,
