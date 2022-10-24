@@ -56,6 +56,11 @@ class DiscountsController < ApplicationController
     end
   end
 
+  def discarded
+    @q = Discount.ransack(params[:q])
+    @discounts = @q.result(distinct: true).discarded
+  end
+
   private
 
   def set_discount
