@@ -1,5 +1,7 @@
 class Discount < ApplicationRecord
+    include Discard::Model
     included Availability
+
     enum post_status: { available: 1,  unavailable: 2 }
     enum discount_type: { flat: 1,  percentage: 2 }
 
