@@ -59,6 +59,7 @@ class DiscountsController < ApplicationController
       :name,
       :post_status,
       :discount_type,
-      :discount_percentage)
+      :discount_percentage,
+      food_item_ids: [])
   end
 end
