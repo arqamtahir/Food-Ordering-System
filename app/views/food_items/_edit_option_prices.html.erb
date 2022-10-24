@@ -1,0 +1,21 @@
+<div class="nested-fields">
+  <div class="form-group">
+    <div class="row mt-3">
+      <div class="col-4">
+        <div class="input-group">
+          <label for="" class="col-form-label form-control sfl" id="sfl" readonly>Enter price for </label>
+          <%= f.hidden_field :id%>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">RS</span>
+          </div>
+            <%= f.text_field :price%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
