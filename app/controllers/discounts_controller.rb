@@ -3,7 +3,12 @@ class DiscountsController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
   def index
-    @discounts=Discount.all
+    @q =  Discount.ransack(params[:q])
+    @discounts = @q.result(distinct: true).kept
+
+    if params[:q].blank?
+      @discounts = @q.result(distinct: true).available.kept
+    end
   end
 
   def show
