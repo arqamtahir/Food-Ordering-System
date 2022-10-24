@@ -44,12 +44,15 @@ class DiscountsController < ApplicationController
   end
 
   def destroy
-    if @discount.destroy
-      flash[:notice] = "discount deleted successfully"
-      redirect_back(fallback_location: root_path)
+    if @discount.discarded?
+      flash[:notice] = "food item deleted successfully"
+      redirect_to discounts_path
+    elsif @discount.discard
+      flash[:notice] = "food item moved to recycle bin, successfully"
+      redirect_to discounts_path
     else
-      flash[:alert] = "Therer is some issue Discount data is not deleted"
-      render :index
+      flash[:alert] = "Therer is some issue discount not deleted"
+      render :action => "index"
     end
   end
 
