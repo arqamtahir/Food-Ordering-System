@@ -7,4 +7,8 @@ class Discount < ApplicationRecord
 
     has_and_belongs_to_many :food_items
     has_many :discount_timings
+
+    def self.ransackable_scopes(auth_object = nil)
+	    %i(available unavailable)
+    end
 end
