@@ -13,7 +13,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">RS</span>
           </div>
-            <%= f.text_field :price%>
+            <%= f.number_field :price, required: true, min: 1%>
         </div>
       </div>
     </div>
