@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   end
   
   resources :option_items
-  resources :discounts
+
+  resources :discounts do
+    get :discarded , on: :collection
+    get :restore , on: :member
+  end
 
   resources :menus
   resources :menu_items
