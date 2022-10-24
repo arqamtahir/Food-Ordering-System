@@ -61,6 +61,12 @@ class DiscountsController < ApplicationController
     @discounts = @q.result(distinct: true).discarded
   end
 
+  def restore
+    @discount.undiscard
+      flash[:notice] = "food item restore successfully"
+      redirect_to discounts_path(@discount)
+  end
+
   private
 
   def set_discount
