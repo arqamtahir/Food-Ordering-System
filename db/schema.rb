@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_24_141150) do
+ActiveRecord::Schema.define(version: 2022_10_26_114220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -218,21 +218,11 @@ ActiveRecord::Schema.define(version: 2022_10_24_141150) do
   end
 
   create_table "menu_items", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "menu_itemable_type", null: false
     t.bigint "menu_itemable_id", null: false
     t.index ["menu_itemable_type", "menu_itemable_id"], name: "index_menu_items_on_menu_itemable"
-  end
-
-  create_table "menu_items_menus", id: false, force: :cascade do |t|
-    t.bigint "menu_id", null: false
-    t.bigint "menu_item_id", null: false
-    t.index ["menu_id", "menu_item_id"], name: "index_menu_items_menus_on_menu_id_and_menu_item_id"
-    t.index ["menu_item_id", "menu_id"], name: "index_menu_items_menus_on_menu_item_id_and_menu_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -313,6 +303,8 @@ ActiveRecord::Schema.define(version: 2022_10_24_141150) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_promo_tokens_on_discarded_at"
   end
 
   create_table "promo_tokens_resturants", id: false, force: :cascade do |t|
