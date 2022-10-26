@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_26_114220) do
+ActiveRecord::Schema.define(version: 2022_10_26_115438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,13 +118,6 @@ ActiveRecord::Schema.define(version: 2022_10_26_114220) do
     t.string "deal_itemable_type", null: false
     t.bigint "deal_itemable_id", null: false
     t.index ["deal_itemable_type", "deal_itemable_id"], name: "index_deal_items_on_deal_itemable"
-  end
-
-  create_table "deal_items_deals", id: false, force: :cascade do |t|
-    t.bigint "deal_id", null: false
-    t.bigint "deal_item_id", null: false
-    t.index ["deal_id", "deal_item_id"], name: "index_deal_items_deals_on_deal_id_and_deal_item_id"
-    t.index ["deal_item_id", "deal_id"], name: "index_deal_items_deals_on_deal_item_id_and_deal_id"
   end
 
   create_table "deals", force: :cascade do |t|
