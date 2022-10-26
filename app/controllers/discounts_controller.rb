@@ -16,6 +16,7 @@ class DiscountsController < ApplicationController
 
   def new
     @discount=Discount.new
+    @discount_timings = @discount.discount_timings.build
   end
 
   def edit
@@ -79,6 +80,11 @@ class DiscountsController < ApplicationController
       :post_status,
       :discount_type,
       :discount_percentage,
-      food_item_ids: [])
+      food_item_ids: [],
+      discount_timings_attributes: [
+        :id,
+        :start_day,
+        :end_day,
+        :_destroy])
   end
 end
