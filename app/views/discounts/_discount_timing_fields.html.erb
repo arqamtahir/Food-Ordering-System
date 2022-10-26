@@ -1,0 +1,13 @@
+<div class="nested-fields">
+  <div class="form-group">
+    <%= f.label :start_day, class: "col-2 col-form-label" %>
+    <%= f.date_field :start_day, class: "form-control input-rounded shadow rounded"%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_day, class: "col-2 col-form-label" %>
+    <%= f.date_field :end_day, class: "form-control input-rounded shadow rounded"%>
+  </div>
+
+  <%= link_to_remove_association "Delete", f, class: "btn btn-danger btn-outline btn-sm btn-floating btn-rounded" %>
+</div>
