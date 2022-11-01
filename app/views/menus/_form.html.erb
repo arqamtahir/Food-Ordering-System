@@ -3,10 +3,37 @@
 	  <%= f.hidden_field :resturant_id, value: current_employee.resturant_id %>
 
 		<div class="form-group">
-			<%= f.label :name, class: "col-2 col-form-label" %>
+			<%= f.label :name_of_Menu, class: "font-weight-bold col-form-label" %>
 			<%= f.text_field :name, class: "form-control input-rounded shadow rounded", placeholder: "name of menu" %>          
 		</div>
-		
+
+		<div class="col-md-4 mt-4">
+			<div class="card">
+				<h5 class="card-header font-weight-bold">Select Menu Item</h5>
+				<div class="card-body mCustomScrollbar _mCS_2 mCS-autoHide" style="max-height: 400px; position: relative; overflow: visible;" data-scroll="minimal-dark">
+					<div id="mCSB_2" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0" style="max-height: 360px;">
+						<div id="mCSB_2_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+							<div class="form-group">
+								<%= f.fields_for :menu_items do |menu_item|%>
+									<%= render  'menu_item_fields', f: menu_item %>
+								<% end %>
+							</div>
+						</div>
+					</div>
+
+					<div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
+						<div class="mCSB_draggerContainer">
+							<div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 104px; max-height: 380px; top: 0px;">
+								<div class="mCSB_dragger_bar" style="line-height: 50px;"></div>
+							</div>
+
+							<div class="mCSB_draggerRail"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="card-footer">
 			<%= f.submit class: "btn btn-info btn-outline btn-floating btn-rounded" %>
 		</div>
