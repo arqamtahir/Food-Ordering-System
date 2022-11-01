@@ -75,11 +75,10 @@ class MenuItemsController < ApplicationController
 
     def permit_params
       params.require(:menu_item).permit(
-        :name,
-        :description,
-        :post_status,
         :menu_itemable_id,
         :menu_itemable_type,
-        addon_ids: [])
+        :resturant_id,
+        addon_ids: [],
+        menu_ids: [])
     end
 end
