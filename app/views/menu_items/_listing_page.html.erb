@@ -33,8 +33,9 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Status</th>
+                <th>menu_itemable_id</th>
+                <th>menu_itemable_type</th>
+                <th>menu name</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -43,8 +44,9 @@
               <% @menu_items.each do |menu_item| %>
                 <tr>
                   <td><%=menu_item.id%></td>
-                  <td><%=menu_item.name%></td>
-                  <td><%=menu_item.post_status%></td>
+                  <td><%=menu_item.menu_itemable_id%></td>
+                  <td><%=menu_item.menu_itemable.name%></td>
+                  <td><%=menu_item.menu.name%></td>
 
                   <td>
                     <%= link_to edit_menu_item_path(menu_item) do%>
