@@ -19,6 +19,19 @@ class MenusController < ApplicationController
   end
 
   def edit
+    @items = []
+    Deal.all.map do |deal|
+      if !(@menu.menu_items.exists?(menu_itemable_id: deal.id))
+        @items << {menu_itemable_id: deal.id, menu_itemable_type: "Deal"}
+      end
+    end
+
+    GroupItem.all.map do |group_item|
+      if !(@menu.menu_items.exists?(menu_itemable_id: group_item.id))
+        @items << {menu_itemable_id: group_item.id, menu_itemable_type: "GroupItem"}
+      end
+    end
+    @menu.menu_items.build( @items.map { |item| item })
   end
 
   def create
