@@ -25,3 +25,4 @@ import "./js/components/countUp-init"
  //alert("21");
  
 // console.log("1");
+import "select2setup"
