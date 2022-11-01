@@ -65,11 +65,11 @@
             </thead>
 
             <tbody>
-              <% @food_item.options.zip(@food_item.option_items).each do |(option, option_item )|%>
+              <% @food_item.option_items.each do |option|%>
                 <tr>
-                  <td><%=option.id%></td>
-                  <td><%=option.name%></td>
-                  <td><%=option_item.price%></td>
+                  <td><%=option.option_id%></td>
+                  <td><%=option.option_name%></td>
+                  <td><%=option.price%></td>
                 </tr>
               <%end%>
             </tbody>
