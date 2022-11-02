@@ -18,6 +18,11 @@
     <%= f.label :phone %><br/>
     <%= f.text_field :phone %>
   </div>
+
+  <div class="field">
+    <%= f.label :Upload_Image %><br/>
+    <%= f.file_field :avatar %>
+  </div>
   
   <% if f.object.class.require_password_on_accepting %>
     <div class="field">
