@@ -1,6 +1,6 @@
-<nav class="top-toolbar navbar navbar-desktop flex-nowrap" id="navbar-container">
-  <!-- START LEFT DROPDOWN MENUS -->
-  <%if current_employee %>
+<%if current_employee %>
+  <nav class="top-toolbar navbar navbar-desktop flex-nowrap" id="navbar-container">
+    <!-- START LEFT DROPDOWN MENUS -->
     <ul class="navbar-nav nav-left">
       <li class="nav-item nav-text dropdown dropdown-menu-md" id="nav-text-custom">
         <a href="javascript:void(0)" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -450,6 +450,6 @@
 
 
     <%= yield :search_form%>
-  <%end%>
-  <!--END TOP TOOLBAR SEARCH -->
-</nav>
+    <!--END TOP TOOLBAR SEARCH -->
+  </nav>
+<%end%>
