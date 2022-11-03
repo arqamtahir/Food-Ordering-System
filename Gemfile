@@ -31,10 +31,14 @@ gem 'ransack'
 # discard for soft delete
 gem 'discard', '~> 1.2'
 
+# Image processing for varients
+# gem 'image_processing'
+
+
 
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+ gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
