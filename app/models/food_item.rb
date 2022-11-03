@@ -1,6 +1,8 @@
 class FoodItem < ApplicationRecord
     include Discard::Model
     
+    has_many_attached :food_pictures
+
     included Availability
     enum post_status: { available: 1,  unavailable: 2 }
 
