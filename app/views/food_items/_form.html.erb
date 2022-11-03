@@ -22,7 +22,7 @@
 						<%= f.label :description , class: "col-3 col-form-label"%>
 						<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of Food Item", autocomplete: "description" %>
 					</div>
-					
+
 					<div class="row">
 						<div class="form-group col-5">
 							<%= f.label :Select_Category , class: "col-form-label"%>
@@ -33,6 +33,11 @@
 							<%= f.label :Add_Discounts , class: "col-form-label"%>
 							<%= f.collection_select :discount_ids , Discount.order(:id), :id, :discount_percentage, {:prompt => 'Choose a Discount...'}, {class: "form-control input-rounded shadow category_select"} %>
 						</div>
+					</div>
+
+					<div class="form-group">
+						<%= f.label :Add_images , class: "col-3 col-form-label"%>
+						<%= f.file_field :food_pictures, multiple: true, class: "form-control input-rounded shadow rounded"%>
 					</div>
 				</div>
 			</div>
