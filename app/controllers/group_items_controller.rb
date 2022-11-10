@@ -58,6 +58,16 @@ class GroupItemsController < ApplicationController
       end
     end
 
+    def restore
+      if  @group_item.undiscard
+        flash[:notice] = "GroupItem has been restore, successfully"
+        redirect_to group_items_path(@group_item)
+      else
+        flash[:alert] = "There is some issues, GroupItem not restored "
+        redirect_to group_items_path(@group_item)
+      end
+    end
+
     private
 
     def set_group_item
