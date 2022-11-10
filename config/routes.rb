@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   end
 
   resources :group_items , shallow: true do
+    get :discarded , on: :collection 
+    get :restore , on: :member 
     resources :options 
   end
   
