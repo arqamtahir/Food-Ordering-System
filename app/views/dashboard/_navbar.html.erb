@@ -423,18 +423,13 @@
             </div>
           </div>
 
-          <a class="dropdown-item" href="apps.messages.html">
-            <i class="icon dripicons-mail"></i> Message 
-            <span class="badge badge-accent rounded-circle w-15 h-15 p-0 font-size-10">4</span>  
-          </a>
+          <%= link_to  employees_profiles_show_path, class:"dropdown-item"	do %>
+            <i class="icon dripicons-user"></i> profile
+          <% end %>
 
-          <a class="dropdown-item" href="pages.profile.html">
-            <i class="icon dripicons-user"></i> Profile  
-          </a>
-
-          <a class="dropdown-item" href="pages.my-account.html">
+          <%= link_to  edit_employee_registration_path, class:"dropdown-item"	do %>
             <i class="icon dripicons-gear"></i> Account Settings   
-          </a>
+          <% end %>
 
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">
