@@ -30,12 +30,21 @@
 								<td><%=@group_item.post_status%></td>
                 
                 <td>
-                  <%= link_to edit_group_item_path(@group_item) do%>
-                    <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                  <% if  @group_item.discarded? %>
+                    <%= link_to "Restore",  restore_group_item_path(@group_item),
+                      class:"btn btn-info btn-outline btn-sm btn-floating btn-rounded"%>
+                  <% else %>
+                    <%= link_to edit_group_item_path(@group_item) do%>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
                   <% end %>
 
-                  <%= link_to group_item_path(@group_item), method: :delete, data: {confirm: 'Are you sure?'} do%>
-                    <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                  <% if  @group_item.discarded? %>
+                    <%= link_to "Permanent delete", group_item_path(@group_item), class:"btn btn-danger btn-outline btn-sm btn-floating btn-rounded", method: :delete, data: {confirm: 'Are you sure to delete it permanently?'} %>
+                  <% else %>
+                    <%= link_to group_item_path(@group_item), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                      <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
                   <% end %>
                 </td>
 							</tr>
