@@ -1,4 +1,6 @@
 class GroupItem < ApplicationRecord
+    include Discard::Model
+
     included Availability
 
     has_many :options , inverse_of: :group_item, dependent: :destroy
