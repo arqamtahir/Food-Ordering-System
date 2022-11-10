@@ -1,5 +1,5 @@
 class GroupItemsController < ApplicationController
-  before_action :set_group_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_group_item, only: [:show, :edit, :update, :destroy, :restore]
   before_action :permit_params, only: [:update, :create]
 
     def index
