@@ -28,6 +28,7 @@
               <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Status</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -37,6 +38,7 @@
                 <tr>
                   <td><%=menu.id%></td>
                   <td><%=menu.name%></td>
+                  <td><%=menu.post_status%></td>
                   
                   <td>
                     <%= link_to edit_menu_path(menu) do%>
