@@ -82,6 +82,11 @@ class MenusController < ApplicationController
     end
   end
 
+  def discarded
+    @q =  current_employee.resturant.menus.ransack(params[:q])
+    @menus = @q.result(distinct: true).discarded
+  end
+
   private
 
   def set_menu
