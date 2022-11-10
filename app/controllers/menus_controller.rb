@@ -4,7 +4,10 @@ class MenusController < ApplicationController
 
   def index
     @q =  current_employee.resturant.menus.ransack(params[:q])
-    @menus = @q.result(distinct: true)
+    @menus = @q.result(distinct: true).kept
+    if params[:q].blank?
+      @menus = @q.result(distinct: true).available.kept
+    end
   end
 
   def show
@@ -57,8 +60,11 @@ class MenusController < ApplicationController
   end
 
   def destroy
-    if @menu.destroy
-      flash[:notice] = "menu deleted successfully"
+    if @menu.discarded?
+      flash[:notice] = "menu has been deleted, successfully"
+      redirect_to menus_path
+    elsif @menu.discard
+      flash[:notice] = "Menu has been moved to recyclebin, successfully"
       redirect_to menus_path
     else
       flash[:alert] = "Therer is some issue menu not deleted"
