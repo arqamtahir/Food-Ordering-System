@@ -10,4 +10,8 @@ class GroupItem < ApplicationRecord
     accepts_nested_attributes_for :options, reject_if: :all_blank, allow_destroy: true
 
     enum post_status: { available: 1,  unavailable: 2 }
+
+    def self.ransackable_scopes(auth_object = nil)
+	    %i(available unavailable)
+    end
 end
