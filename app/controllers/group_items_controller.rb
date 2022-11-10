@@ -68,6 +68,11 @@ class GroupItemsController < ApplicationController
       end
     end
 
+    def discarded
+      @q = GroupItem.ransack(params[:q])
+      @group_items = @q.result(distinct: true).discarded
+    end
+
     private
 
     def set_group_item
