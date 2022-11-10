@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="card shadow p-3 mb-3 rounded form">
         <div class= "row">
-          <h1 class="card-header col-9 ml-2">Menu</h1>        
+          <h1 class="card-header col-9 ml-2">Menu</h1>
           
           <%= link_to menus_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
             <span> Back to Menu</span>
@@ -16,6 +16,7 @@
               <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -24,14 +25,24 @@
 							<tr>
 								<td><%=@menu.id%></td>
 								<td><%=@menu.name%></td>
+								<td><%=@menu.post_status%></td>
                 
                 <td>
-                  <%= link_to edit_menu_path(@menu) do%>
-                    <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                  <% if  @menu.discarded? %>
+                    <%= link_to "Restore",  restore_menu_path(@menu),
+                      class:"btn btn-info btn-outline btn-sm btn-floating btn-rounded"%>
+                  <% else %>
+                    <%= link_to edit_menu_path(@menu) do%>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
                   <% end %>
-                  
-                  <%= link_to menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} do%>
-                    <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+
+                  <% if  @menu.discarded? %>
+                    <%= link_to "Permanent delete", menu_path(@menu), class:"btn btn-danger btn-outline btn-sm btn-floating btn-rounded", method: :delete, data: {confirm: 'Are you sure to delete it permanently?'} %>
+                  <% else %>
+                    <%= link_to menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                      <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
                   <% end %>
                 </td>
 							</tr>
