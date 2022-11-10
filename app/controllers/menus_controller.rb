@@ -72,6 +72,16 @@ class MenusController < ApplicationController
     end
   end
 
+  def restore
+    if @menu.undiscard
+    flash[:notice] = "Menu has been restored successfully"
+    redirect_to menus_path(@menu)
+    else
+      flash[:alert] = "Ther is some issues"
+      render :discarded
+    end
+  end
+
   private
 
   def set_menu
