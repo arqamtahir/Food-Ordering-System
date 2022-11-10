@@ -3,24 +3,11 @@ class GroupItemsController < ApplicationController
   before_action :permit_params, only: [:update, :create]
 
     def index
-      if params.key?(:status)
-        if params[:status] == "available"
-          @q =  GroupItem.ransack(params[:q])
-          @group_items = @q.result(distinct: true).where(post_status: 1)
-        end 
-        
-        if params[:status] == "unavailable"
-          @q =  GroupItem.ransack(params[:q])
-          @group_items = @q.result(distinct: true).where(post_status: 2)
-        end
+      @q = GroupItem.ransack(params[:q])
+      @group_items = @q.result(distinct: true).kept
 
-        if params[:status] == "all"
-          @q =  GroupItem.ransack(params[:q])
-          @group_items = @q.result(distinct: true)
-        end
-      else
-        @q =  GroupItem.ransack(params[:q])
-        @group_items = @q.result(distinct: true)
+      if params[:q].blank?
+        @group_items = @q.result(distinct: true).available.kept
       end
     end
 
@@ -59,8 +46,11 @@ class GroupItemsController < ApplicationController
     end
 
     def destroy
-      if @group_item.destroy
+      if @group_item.discarded?
         flash[:notice] = "group_item deleted successfully"
+        redirect_to group_items_path
+      elsif @group_item.discard
+        flash[:notice] = "group_item has been moved to recycle Bin, successfully"
         redirect_to group_items_path
       else
         flash[:alert] = "Therer is some issue group_item not deleted"
