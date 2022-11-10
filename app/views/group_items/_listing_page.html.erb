@@ -3,8 +3,12 @@
     <%= link_to new_group_item_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
       <span>+ Add Group Item</span>
     <% end %>
+
+    <%= link_to discarded_group_items_path, class:"btn btn-info btn-outline btn-floating btn-rounded mt-2 ml-2" do %>
+      <span> Recycle Bin</span>
+    <% end %>
   </div>
-  
+
   <div class="row">
     <div class="col-12">
       <div class="card shadow p-3 mb-3 rounded form">        
