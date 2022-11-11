@@ -49,6 +49,25 @@
             </tbody>
           </table>
         </div>
+
+        <h2 class="card-header bg-light rounded text-dark mb-2 col-3 h2">
+           <i class="zmdi zmdi-check-all zmdi-hc-fw"></i>
+           <u>Selected Menu Items</u></h2>
+
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush">
+            <% if  @menu.menu_items.exists? %>
+              <% @menu.menu_items.each_with_index do |item, index|%>
+                <li class="d-flex align-items-center mb-3 ml-4">
+                  <span class="badge badge-info badge-circle"><%= index+1 %></span>
+                  <span class="ml-5 h6"><%= item.menu_itemable.name %></span>
+                </li>
+              <% end %>
+            <% else %>
+              <span> There is no item selected for this menu</span>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
