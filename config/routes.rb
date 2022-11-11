@@ -36,6 +36,11 @@ Rails.application.routes.draw do
     get :discarded, on: :collection
     get :restore, on: :member
   end
+
+  resources :deals do
+    get :discarded, on: :collection
+    get :restore, on: :member
+  end
   resources :menu_items
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
