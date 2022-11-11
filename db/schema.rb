@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_124113) do
+ActiveRecord::Schema.define(version: 2022_11_11_114353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,13 +138,12 @@ ActiveRecord::Schema.define(version: 2022_11_10_124113) do
   end
 
   create_table "deal_items", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "deal_itemable_type", null: false
     t.bigint "deal_itemable_id", null: false
+    t.bigint "deal_id", null: false
+    t.index ["deal_id"], name: "index_deal_items_on_deal_id"
     t.index ["deal_itemable_type", "deal_itemable_id"], name: "index_deal_items_on_deal_itemable"
   end
 
@@ -155,7 +154,6 @@ ActiveRecord::Schema.define(version: 2022_11_10_124113) do
     t.float "deal_saved"
     t.integer "post_status"
     t.string "free_item"
-    t.float "free_item_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -411,6 +409,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_124113) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addons", "resturants"
   add_foreign_key "admin_charges", "orders"
+  add_foreign_key "deal_items", "deals"
   add_foreign_key "discount_timings", "discounts"
   add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "employees", "resturants"
