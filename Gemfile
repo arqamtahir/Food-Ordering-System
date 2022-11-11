@@ -30,6 +30,9 @@ gem "cocoon"
 gem 'ransack'
 # discard for soft delete
 gem 'discard', '~> 1.2'
+# scrollebar
+gem 'scrollbar-rails'
+
 
 # Image processing for varients
 # gem 'image_processing'
