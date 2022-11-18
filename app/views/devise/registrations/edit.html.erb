@@ -23,14 +23,14 @@
 
                   <div class="form-group">
                     <% if @employee.avatar.attached? %>
-                      <%=image_tag @employee.avatar, class:"w-50 rounded-circle" %>
+                      <%=image_tag @employee.avatar, class:"w-50 rounded-circle", id: "image_field" %>
                     <%else%>
                       <%=image_tag 'img/profile_avatar.png', class:"w-50 rounded-circle" %>
                     <% end %>
 
                     <div class="file-upload">
                       <label for="employee_avatar" class="btn btn-primary m-b-0 m-l-5 m-r-5">upload a new picture</label>
-                      <%= f.file_field :avatar, class:"file-upload__input" %>
+                      <%= f.file_field :avatar, class:"file-upload__input", onchange: "previewImage(event)" %>
                     </div>
                   </div>
 
