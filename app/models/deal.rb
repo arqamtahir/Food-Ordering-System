@@ -6,6 +6,8 @@ class Deal < ApplicationRecord
 
     has_many :deal_items, dependent: :destroy
     has_many :menu_items,as: :menu_itemable
+    has_many :addon_items,as: :addon_itemable
 
     accepts_nested_attributes_for :deal_items, allow_destroy: true
+    accepts_nested_attributes_for :addon_items, allow_destroy: true
 end
