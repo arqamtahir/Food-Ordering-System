@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_11_114353) do
+ActiveRecord::Schema.define(version: 2022_11_14_104759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 2022_11_11_114353) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "addon_items", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "addon_id"
+    t.string "addon_itemable_type", null: false
+    t.bigint "addon_itemable_id", null: false
+    t.index ["addon_id"], name: "index_addon_items_on_addon_id"
+    t.index ["addon_itemable_type", "addon_itemable_id"], name: "index_addon_items_on_addon_itemable"
+  end
+
   create_table "addons", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -68,13 +78,6 @@ ActiveRecord::Schema.define(version: 2022_11_11_114353) do
     t.datetime "discarded_at"
     t.index ["discarded_at"], name: "index_addons_on_discarded_at"
     t.index ["resturant_id"], name: "index_addons_on_resturant_id"
-  end
-
-  create_table "addons_menu_items", id: false, force: :cascade do |t|
-    t.bigint "addon_id", null: false
-    t.bigint "menu_item_id", null: false
-    t.index ["addon_id", "menu_item_id"], name: "index_addons_menu_items_on_addon_id_and_menu_item_id"
-    t.index ["menu_item_id", "addon_id"], name: "index_addons_menu_items_on_menu_item_id_and_addon_id"
   end
 
   create_table "admin_charges", force: :cascade do |t|
@@ -156,6 +159,8 @@ ActiveRecord::Schema.define(version: 2022_11_11_114353) do
     t.string "free_item"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_deals_on_discarded_at"
   end
 
   create_table "discount_timings", force: :cascade do |t|
@@ -407,6 +412,7 @@ ActiveRecord::Schema.define(version: 2022_11_11_114353) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addon_items", "addons"
   add_foreign_key "addons", "resturants"
   add_foreign_key "admin_charges", "orders"
   add_foreign_key "deal_items", "deals"
