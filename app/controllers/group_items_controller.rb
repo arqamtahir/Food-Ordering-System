@@ -16,10 +16,21 @@ class GroupItemsController < ApplicationController
     end
 
     def new
+      @addons = []
 			@group_item=GroupItem.new
+      Addon.all.map{ |addon| @addons << { addon_id: addon.id}}
+      @group_item.addon_items.build( @addons.map { |addon| addon})
     end
 
     def edit
+      @addons = []
+      Addon.all.map do |addon|
+        if !(@group_item.addon_items.exists?(addon_id: addon.id))
+          @addons << {addon_id: addon.id}
+        end
+      end
+
+      @group_item.addon_items.build( @addons.map { |addon| addon })
     end
 
     def create
@@ -88,6 +99,12 @@ class GroupItemsController < ApplicationController
           :id, 
           :name,
           :group_item_id,
-          :_destroy])
+          :_destroy],
+        addon_items_attributes: [
+          :id,
+          :addon_itemable_id,
+          :addon_itemable_type,
+          :addon_id,
+          :_destroy ])
     end
 end
