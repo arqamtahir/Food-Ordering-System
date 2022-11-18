@@ -1,5 +1,6 @@
 class Employee < ApplicationRecord
 
+  after_update :send_alert
   has_one_attached :avatar
 
   enum designation: { employee: 0, manager: 1 }
@@ -28,5 +29,11 @@ class Employee < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  protected
+
+  def send_alert
+    EmployeeMailer.edit_information_mail(self).deliver
   end
 end
