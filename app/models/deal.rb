@@ -10,4 +10,8 @@ class Deal < ApplicationRecord
 
     accepts_nested_attributes_for :deal_items, allow_destroy: true
     accepts_nested_attributes_for :addon_items, allow_destroy: true
+
+    def self.ransackable_scopes(auth_object = nil)
+	    %i(available unavailable)
+    end
 end
