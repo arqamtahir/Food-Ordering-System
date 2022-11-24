@@ -8,4 +8,8 @@ class Timing < ApplicationRecord
       friday: 4,
       saturday: 5,
       sunday: 6 }
+
+  belongs_to :menu
+
+  validates :days, :start_time, :end_time, presence: true
 end
