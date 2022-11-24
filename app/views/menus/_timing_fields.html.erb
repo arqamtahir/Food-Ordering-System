@@ -1,0 +1,24 @@
+<div class="nested-fields">
+  <div class="form-group">
+    <%=f.label :days, "Set Day" %>
+    <%= f.select(:days, Timing.days.keys) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start_time, class: "col-2 col-form-label" %>
+    <%= f.time_field :start_time, class: "form-control input-rounded shadow rounded",
+      value: "%H:%M",
+      min: 'hh:mm:ss',
+      max: 'hh:mm:ss' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_time, class: "col-2 col-form-label" %>
+    <%= f.time_field :end_time, class: "form-control input-rounded shadow rounded",
+      value: "%H:%M",
+      min: 'hh:mm:ss',
+      max: 'hh:mm:ss' %>
+  </div>
+
+  <%= link_to_remove_association "Delete", f, class: "btn btn-danger btn-outline btn-sm btn-floating btn-rounded" %>
+</div>
