@@ -50,11 +50,40 @@
           </table>
         </div>
 
-        <h2 class="card-header bg-light rounded text-dark mb-2 col-3 h2">
-           <i class="zmdi zmdi-check-all zmdi-hc-fw"></i>
-           <u>Selected Menu Items</u></h2>
+        <h1 class="card-header bg-light rounded text-dark mb-2 col-6 h1">
+          <i class="zmdi zmdi-time zmdi-hc-fw"></i>
+          <u>Time And Date For Menus</u></h1>
 
-        <div class="card-body p-0">
+        <div class="card-body p-0 col-6">
+          <% if  @menu.timings.exists?%>
+            <% @menu.timings.each do |menu_time|%>
+              <ul class="list-reset p-t-10 list-group ml-4">
+                <li class="p-b-10">
+                  <span class="w-150 d-inline-block font-weight-bold">Days:</span>
+                  <span><%= menu_time.days %></span>
+                </li>
+
+                <li class="p-b-10">
+                  <span class="w-150 d-inline-block font-weight-bold">Start Time:</span>
+                  <span><%= menu_time.start_time %></span>
+                </li>
+
+                <li class="p-b-10">
+                  <span class="w-150 d-inline-block font-weight-bold">End Time:</span>
+                  <span><%= menu_time.end_time %></span>
+                </li>
+              </ul>
+            <% end %>
+          <% else%>
+            <p> There is no time adjuestment for this menu.</p>
+          <% end %>
+        </div>
+
+        <h1 class="card-header bg-light rounded text-dark mb-2 col-3 h1">
+           <i class="zmdi zmdi-check-all zmdi-hc-fw"></i>
+           <u>Selected Menu Items</u></h1>
+
+        <div class="card-body p-0 col-6">
           <ul class="list-group list-group-flush">
             <% if  @menu.menu_items.exists? %>
               <% @menu.menu_items.each_with_index do |item, index|%>
