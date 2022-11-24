@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_14_104759) do
+ActiveRecord::Schema.define(version: 2022_11_24_114635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,13 +264,6 @@ ActiveRecord::Schema.define(version: 2022_11_14_104759) do
     t.index ["resturant_id"], name: "index_menus_on_resturant_id"
   end
 
-  create_table "menus_timings", id: false, force: :cascade do |t|
-    t.bigint "menu_id", null: false
-    t.bigint "timing_id", null: false
-    t.index ["menu_id", "timing_id"], name: "index_menus_timings_on_menu_id_and_timing_id"
-    t.index ["timing_id", "menu_id"], name: "index_menus_timings_on_timing_id_and_menu_id"
-  end
-
   create_table "option_items", force: :cascade do |t|
     t.float "price"
     t.bigint "food_item_id", null: false
@@ -394,11 +387,13 @@ ActiveRecord::Schema.define(version: 2022_11_14_104759) do
   end
 
   create_table "timings", force: :cascade do |t|
-    t.string "days"
     t.string "start_time"
     t.string "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "days"
+    t.bigint "menu_id"
+    t.index ["menu_id"], name: "index_timings_on_menu_id"
   end
 
   create_table "token_valid_dates", force: :cascade do |t|
@@ -437,5 +432,6 @@ ActiveRecord::Schema.define(version: 2022_11_14_104759) do
   add_foreign_key "resturant_schedules", "resturants"
   add_foreign_key "selected_addons", "addons"
   add_foreign_key "selected_addons", "order_items"
+  add_foreign_key "timings", "menus"
   add_foreign_key "token_valid_dates", "promo_tokens"
 end
