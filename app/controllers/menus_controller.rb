@@ -96,11 +96,18 @@ class MenusController < ApplicationController
   def permit_params
     params.require(:menu).permit(
       :name,
+      :post_status,
       :resturant_id,
       menu_items_attributes: [
         :id,
         :menu_itemable_id,
         :menu_itemable_type,
+        :_destroy ],
+      timings_attributes: [
+        :id,
+        :days,
+        :start_time,
+        :end_time,
         :_destroy ])
   end
 end
