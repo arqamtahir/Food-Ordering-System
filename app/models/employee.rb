@@ -1,9 +1,9 @@
 class Employee < ApplicationRecord
-
   after_update :send_alert
   has_one_attached :avatar
 
   enum designation: { employee: 0, manager: 1 }
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
