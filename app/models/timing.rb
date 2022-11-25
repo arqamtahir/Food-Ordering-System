@@ -1,3 +1,15 @@
 class Timing < ApplicationRecord
-    has_and_belongs_to_many :menus
+
+  enum days: {
+      monday: 0,
+      tuesday: 1,
+      wednesday: 2,
+      thursday: 3,
+      friday: 4,
+      saturday: 5,
+      sunday: 6 }
+
+  belongs_to :menu
+
+  validates :days, :start_time, :end_time, presence: true
 end

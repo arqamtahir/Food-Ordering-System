@@ -1,0 +1,62 @@
+<section class="page-content container-fluid">
+  <div class= "row float-right ml-auto mb-2 mr-3">          
+    <%= link_to new_group_item_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+      <span>+ Add Group Item</span>
+    <% end %>
+
+    <%= link_to discarded_group_items_path, class:"btn btn-info btn-outline btn-floating btn-rounded mt-2 ml-2" do %>
+      <span> Recycle Bin</span>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow p-3 mb-3 rounded form">        
+        <div class= "row">
+          <div class="col-6">
+            <h1 class="card-header ml-2">Group Items</h1>          
+          </div>
+          
+          <%= render "shared/filteration"%>
+        </div>
+        
+        <div class="card-body ">
+          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @group_items.each do |group_item| %>
+                <tr>
+                  <td><%=group_item.id%></td>
+                  <td><%=group_item.name%></td>
+                  <td><%=group_item.post_status%></td>
+
+                  <td>
+                    <%= link_to edit_group_item_path(group_item) do%>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                    
+                    <%= link_to group_item_path(group_item) do%>
+                      <i class="la la-eye btn btn-success btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                    
+                    <%= link_to group_item_path(group_item), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                      <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                  </td>
+                </tr>
+							<% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

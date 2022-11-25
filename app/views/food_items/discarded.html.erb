@@ -1,0 +1,40 @@
+<section class="page-content container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow p-3 mb-3 rounded form">        
+        <div class= "row">
+          <div class="col-6">
+            <h1 class="card-header ml-2">Food Items</h1>          
+          </div>
+        </div>
+        
+        <div class="card-body ">
+          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @food_items.each do |food_item| %>
+                <tr>
+                  <td><%=food_item.id%></td>
+                  <td><%=food_item.name%></td>
+                  <td><%=food_item.post_status%></td>
+
+                  <td>
+                    <%= link_to "Visit", food_item_path(food_item), class:"btn btn-success btn-outline btn-sm btn-floating btn-rounded" %>
+                  </td>
+                </tr>
+							<% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

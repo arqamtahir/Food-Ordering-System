@@ -1,0 +1,19 @@
+<div class="nested-fields">
+  <div class="form-group">
+    <%= f.hidden_field :deal_itemable_id %>
+    <%= f.hidden_field :deal_itemable_type %>
+  </div>
+
+  <div class="form-group ml-3 d-flex justify-content-between align-items-center">
+    <div>
+      <% if  f.object.persisted?%>
+        <%= f.check_box :_destroy, {checked: true}, '0', '1' %>
+      <% else f.object.new_record?%>
+        <%= f.check_box :_destroy, {}, '0', '1' %>
+      <% end %>
+
+      <%= f.label :name , f.object.deal_itemable.name %>
+    </div>
+    <span class="badge badge-info mr-2"><%=f.object.deal_itemable_type%></span>
+  </div>
+</div>

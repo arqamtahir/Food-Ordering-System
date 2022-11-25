@@ -1,0 +1,79 @@
+<section class="page-content container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class= "row">
+          <h1 class="card-header col-9 ml-2"> Deal </h1>
+
+          <%= link_to deals_path, class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+            <span> Back to Deals</span>
+          <% end %>
+        </div>
+
+        <div class="card-body">
+          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Free Item</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+							<tr>
+								<td><%=@deal.id%></td>
+								<td><%=@deal.name%></td>
+								<td><%=@deal.description%></td>
+								<td><%=@deal.post_status%></td>
+                <td><%=@deal.free_item%></td>
+
+                <td>
+                  <% if  @deal.discarded? %>
+                    <%= link_to "Restore",  restore_deal_path(@deal),
+                      class:"btn btn-info btn-outline btn-sm btn-floating btn-rounded"%>
+                  <% else %>
+                    <%= link_to edit_deal_path(@deal) do%>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                  <% end %>
+
+                  <% if  @deal.discarded? %>
+                    <%= link_to "Permanent delete", deal_path(@deal), class:"btn btn-danger btn-outline btn-sm btn-floating btn-rounded", method: :delete, data: {confirm: 'Are you sure to delete it permanently?'} %>
+                  <% else %>
+                    <%= link_to deal_path(@deal), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                      <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                  <% end %>
+                </td>
+							</tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-body">
+          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @deal.deal_items.each do |item|%>
+                <tr>
+                  <td><%=item.deal_itemable.id%></td>
+                  <td><%=item.deal_itemable.name%></td>
+                </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

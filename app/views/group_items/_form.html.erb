@@ -1,0 +1,73 @@
+<div class="card-body">
+	<ul class="nav nav-pills nav-pills-primary mb-3" id="pills-demo-1" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="pills-1-tab" data-toggle="pill" href="#pills-1" role="tab" aria-controls="pills-1" aria-selected="true">Category details</a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" id="pills-2-tab" data-toggle="pill" href="#pills-2" role="tab" aria-controls="pills-2" aria-selected="false">Add Options </a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" id="pills-3-tab" data-toggle="pill" href="#pills-3" role="tab" aria-controls="pills-3" aria-selected="false">Select Addons </a>
+		</li>
+	</ul>
+	
+	<%= form_for group_item, class: "shadow p-3 mb-3 rounded form" do |f| %>
+		<div class="tab-content shadow p-3 mb-3 rounded form" id="pills-tabContent-1">
+			<div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1">
+				<div class="card-body">
+					<div class="form-group">
+						<%= f.label :name, class: "col-2 col-form-label" %>
+						<%= f.text_field :name, class: "form-control input-rounded shadow rounded", placeholder: "name of Category" %>          
+					</div>
+
+					<div class="form-group">
+						<%= f.label :description , class: "col-3 col-form-label"%>
+						<%= f.text_field :description ,class: "form-control input-rounded shadow rounded", placeholder: "description of Category", autocomplete: "name" %>
+					</div>
+
+					<div class="form-group">
+						<%=f.label :post_status, "Category Status" %>
+						<%= f.select(:post_status, GroupItem.post_statuses.keys) %>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2">
+				<div>
+					<%= f.fields_for :options do |o| %>
+						<%= render "option_fields", f: o %>
+					<% end %>
+					
+					<div>
+						<br>
+						<%= link_to_add_association "Add Option", f, :options , class: "btn btn-success btn-sm btn-floating btn-rounded"%>
+					</div>
+				</div>
+			</div>
+
+			<div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3">
+				<div class="row ml-3">
+					<div id="wrapper float-left">
+						<h5 class="card-header font-weight-bold">Select Addons</h5>
+
+						<div class="scrollbar" id="style-7">
+							<div class="force-overflow">
+								<div class="form-group">
+									<%= f.fields_for :addon_items do |item| %>
+										<%= render 'addon_item_fields', f: item %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-footer">
+					<%= f.submit class: "btn btn-info btn-outline btn-floating btn-rounded" %>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>

@@ -14,3 +14,14 @@
  *= require_self
  */
  @import "dashboard/dashboard";
+
+ .texthover{
+  color: #788DB4;
+  &:hover {
+    color: #399AF2;
+  }
+}
+
+.form{
+  background-color: #F0F6FF;
+}

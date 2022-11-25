@@ -1,0 +1,116 @@
+<div class="content">
+  <section class="page-content container-fluid">
+    <div class="row">
+      <div class="col-xl-3 col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="profile-card text-center">
+              <div class="thumb-xl member-thumb m-b-10 center-block">
+                <% if @employee.avatar.attached? %>
+                  <%=image_tag @employee.avatar, class:"rounded-circle img-thumbnail" %>
+                <%else%>
+                  <%=image_tag 'img/profile_avatar.png', class:"rounded-circle img-thumbnail" %>
+                <% end %>
+              </div>
+
+              <div class="">
+                <h5 class="m-b-5"><%= @employee.full_name%></h5>
+              </div>
+
+              <%= link_to edit_employee_registration_path, class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+                <span> Edit Profile</span>
+              <% end %>
+
+              <ul class="social-links list-inline m-t-30">
+                <li class="list-inline-item">
+                  <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="zmdi zmdi-facebook"></i></a>
+                </li>
+
+                <li class="list-inline-item">
+                  <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="zmdi zmdi-twitter"></i></a>
+                </li>
+
+                <li class="list-inline-item">
+                  <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="GitHub"><i class="zmdi zmdi-github-alt"></i></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-9 col-lg-8">
+        <div class="card card-tabs">
+          <div class="card-header p-0 no-border">
+            <div class="row">
+              <ul class="nav nav-tabs primary-tabs p-l-30 m-0 col">
+                <li class="nav-item" role="presentation">
+                  <a href="#profile-about" class="nav-link active show font-weight-bold" data-toggle="tab" aria-expanded="true">About</a>
+                </li>
+              </ul>
+              <div class="float-right">
+                <%= link_to edit_employee_registration_path, class:"btn btn-info btn-outline btn-floating btn-rounded mt-3 mr-5" do %>
+                  <span> Edit Profile</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane fadeIn active" id="profile-about">
+                <div class="profile-wrapper">
+                  <h5 class="card-title"><u>Basic Info</u></h5>
+                  <ul class="list-reset p-t-10 list-group ml-4">
+                    <li class="p-b-10">
+                      <span class="w-150 d-inline-block font-weight-bold">First Name:</span>
+                      <span><%= @employee.first_name %></span>
+                    </li>
+
+                    <li class="p-b-10">
+                      <span class="w-150 d-inline-block font-weight-bold">Last Name:</span>
+                      <span><%= @employee.last_name %></span>
+                    </li>
+
+                    <li class="p-b-10">
+                      <span class="w-150 d-inline-block font-weight-bold">Email:</span>
+                      <span><%= @employee.email %></span>
+                    </li>
+
+                    <li class="p-b-10">
+                      <span class="w-150 d-inline-block font-weight-bold">Phone No:</span>
+                      <span><%= @employee.phone %></span>
+                    </li>
+
+                    <li class="p-b-10">
+                      <span class="w-150 d-inline-block font-weight-bold">Restaurant:</span>
+                      <span><%= @employee.resturant.name %></span>
+                    </li>
+
+                    <li class="p-b-10">
+                      <span class="w-150 d-inline-block font-weight-bold">Your Status:</span>
+                      <span><%= @employee.designation %></span>
+                    </li>
+
+                    <% if @employee.designation == "manager" %>
+                      <% if  Employee.where(manager_id: @employee.id ).exists?%>
+                        <li class="p-b-10">
+                          <span class="w-150 d-inline-block font-weight-bold">List of your Employees:</span>
+                          <% employees = Employee.where(manager_id: @employee.id ) %>
+
+                          <% employees.each do |employee|%>
+                            <span class="badge badge-pill badge-info"><%= employee.full_name%></span>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

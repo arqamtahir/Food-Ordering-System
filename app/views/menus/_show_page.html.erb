@@ -1,0 +1,103 @@
+<section class="page-content container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow p-3 mb-3 rounded form">
+        <div class= "row">
+          <h1 class="card-header col-9 ml-2">Menu</h1>
+          
+          <%= link_to menus_path,class:"btn btn-info btn-outline btn-floating btn-rounded mt-2" do %>
+            <span> Back to Menu</span>
+          <% end %>
+        </div>
+
+        <div class="card-body">
+          <table id="bs4-table" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+							<tr>
+								<td><%=@menu.id%></td>
+								<td><%=@menu.name%></td>
+								<td><%=@menu.post_status%></td>
+                
+                <td>
+                  <% if  @menu.discarded? %>
+                    <%= link_to "Restore",  restore_menu_path(@menu),
+                      class:"btn btn-info btn-outline btn-sm btn-floating btn-rounded"%>
+                  <% else %>
+                    <%= link_to edit_menu_path(@menu) do%>
+                      <i class="la la-pencil-square btn btn-info btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                  <% end %>
+
+                  <% if  @menu.discarded? %>
+                    <%= link_to "Permanent delete", menu_path(@menu), class:"btn btn-danger btn-outline btn-sm btn-floating btn-rounded", method: :delete, data: {confirm: 'Are you sure to delete it permanently?'} %>
+                  <% else %>
+                    <%= link_to menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} do%>
+                      <i class="la la-close btn btn-danger btn-outline btn-sm btn-floating btn-rounded"></i>
+                    <% end %>
+                  <% end %>
+                </td>
+							</tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h1 class="card-header bg-light rounded text-dark mb-2 col-6 h1">
+          <i class="zmdi zmdi-time zmdi-hc-fw"></i>
+          <u>Time And Date For Menus</u></h1>
+
+        <div class="card-body p-0 col-6">
+          <% if  @menu.timings.exists?%>
+            <% @menu.timings.each do |menu_time|%>
+              <ul class="list-reset p-t-10 list-group ml-4">
+                <li class="p-b-10">
+                  <span class="w-150 d-inline-block font-weight-bold">Days:</span>
+                  <span><%= menu_time.days %></span>
+                </li>
+
+                <li class="p-b-10">
+                  <span class="w-150 d-inline-block font-weight-bold">Start Time:</span>
+                  <span><%= menu_time.start_time %></span>
+                </li>
+
+                <li class="p-b-10">
+                  <span class="w-150 d-inline-block font-weight-bold">End Time:</span>
+                  <span><%= menu_time.end_time %></span>
+                </li>
+              </ul>
+            <% end %>
+          <% else%>
+            <p> There is no time adjuestment for this menu.</p>
+          <% end %>
+        </div>
+
+        <h1 class="card-header bg-light rounded text-dark mb-2 col-3 h1">
+           <i class="zmdi zmdi-check-all zmdi-hc-fw"></i>
+           <u>Selected Menu Items</u></h1>
+
+        <div class="card-body p-0 col-6">
+          <ul class="list-group list-group-flush">
+            <% if  @menu.menu_items.exists? %>
+              <% @menu.menu_items.each_with_index do |item, index|%>
+                <li class="d-flex align-items-center mb-3 ml-4">
+                  <span class="badge badge-info badge-circle"><%= index+1 %></span>
+                  <span class="ml-5 h6"><%= item.menu_itemable.name %></span>
+                </li>
+              <% end %>
+            <% else %>
+              <span> There is no item selected for this menu</span>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

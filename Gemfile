@@ -24,10 +24,24 @@ gem 'jbuilder', '~> 2.7'
 gem 'activeadmin'
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
+#cocoon gem for nested attributes
+gem "cocoon"
+#ransack for search
+gem 'ransack'
+# discard for soft delete
+gem 'discard', '~> 1.2'
+# scrollebar
+gem 'scrollbar-rails'
+
+
+# Image processing for varients
+# gem 'image_processing'
+
+
 
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+ gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false

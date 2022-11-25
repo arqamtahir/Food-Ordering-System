@@ -1,7 +1,8 @@
 class MenuItem < ApplicationRecord
+    included Availability
     enum post_status: { available: 1,  unavailable: 2 }
 
-    has_and_belongs_to_many :menus
     belongs_to :menu_itemable , polymorphic: true
+    belongs_to :menu, optional: true
 end
 

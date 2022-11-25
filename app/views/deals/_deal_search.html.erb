@@ -1,0 +1,18 @@
+<%= content_for :search_icon do %>
+  <li class="nav-item">
+    <a href="javascript:void(0)" class="open-search-button" data-q-action="open-site-search">
+      <i class="icon dripicons-search" id="nav-icons"></i>
+    </a>
+  </li>
+<% end %>
+
+<%= content_for :search_form do %>
+  <%= search_form_for @q , class:"navbar-form"  do |f| %>
+    <div class="form-group">
+      <%= f.search_field :name_cont , placeholder:"Search and press enter...", class:"form-control navbar-search" %>
+      <i data-q-action="close-site-search" class="icon dripicons-cross close-search"></i>
+    </div>
+
+    <%= f.submit  class:"d-none"  %>
+  <% end %>
+<% end %>

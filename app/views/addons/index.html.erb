@@ -1,0 +1,6 @@
+<%= render 'listing_page'%>
+<%= render 'addon_search' %>
+
+<%= content_for :js do%>
+  Filter.availability()
+<%end%>

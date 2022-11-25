@@ -1,0 +1,18 @@
+<div class="row mt-3">
+  <div class="col-4">
+    <div class="input-group">
+      <label for="" class="col-form-label form-control sfl" id="sfl" readonly>Enter price for <%=o.name%></label>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">RS</span>
+      </div>
+      <input class="form-control" id="food_item_option_items_attributes_<%=i%>_price" name="food_item[option_items_attributes][<%=i%>][price]" type="number"  value="" placeholder="<%=o.name%> price" required min ="1">
+      <input class="form-control" id="food_item_option_items_attributes_<%=i%>_option_id" name="food_item[option_items_attributes][<%=i%>][option_id]" type="hidden" value="<%=o.id%>">
+    </div>
+  </div>
+</div>
+

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_15_141025) do
+ActiveRecord::Schema.define(version: 2022_11_24_114635) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +30,44 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "addon_items", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "addon_id"
+    t.string "addon_itemable_type", null: false
+    t.bigint "addon_itemable_id", null: false
+    t.index ["addon_id"], name: "index_addon_items_on_addon_id"
+    t.index ["addon_itemable_type", "addon_itemable_id"], name: "index_addon_items_on_addon_itemable"
+  end
+
   create_table "addons", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -36,13 +75,10 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "addons_menus", id: false, force: :cascade do |t|
-    t.bigint "addon_id", null: false
-    t.bigint "menu_id", null: false
-    t.index ["addon_id", "menu_id"], name: "index_addons_menus_on_addon_id_and_menu_id"
-    t.index ["menu_id", "addon_id"], name: "index_addons_menus_on_menu_id_and_addon_id"
+    t.bigint "resturant_id"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_addons_on_discarded_at"
+    t.index ["resturant_id"], name: "index_addons_on_resturant_id"
   end
 
   create_table "admin_charges", force: :cascade do |t|
@@ -106,21 +142,13 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
   end
 
   create_table "deal_items", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "deal_itemable_type", null: false
     t.bigint "deal_itemable_id", null: false
-    t.index ["deal_itemable_type", "deal_itemable_id"], name: "index_deal_items_on_deal_itemable"
-  end
-
-  create_table "deal_items_deals", id: false, force: :cascade do |t|
     t.bigint "deal_id", null: false
-    t.bigint "deal_item_id", null: false
-    t.index ["deal_id", "deal_item_id"], name: "index_deal_items_deals_on_deal_id_and_deal_item_id"
-    t.index ["deal_item_id", "deal_id"], name: "index_deal_items_deals_on_deal_item_id_and_deal_id"
+    t.index ["deal_id"], name: "index_deal_items_on_deal_id"
+    t.index ["deal_itemable_type", "deal_itemable_id"], name: "index_deal_items_on_deal_itemable"
   end
 
   create_table "deals", force: :cascade do |t|
@@ -130,9 +158,10 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.float "deal_saved"
     t.integer "post_status"
     t.string "free_item"
-    t.float "free_item_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_deals_on_discarded_at"
   end
 
   create_table "discount_timings", force: :cascade do |t|
@@ -150,6 +179,9 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_discounts_on_discarded_at"
   end
 
   create_table "discounts_food_items", id: false, force: :cascade do |t|
@@ -196,6 +228,10 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_item_id", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_food_items_on_discarded_at"
+    t.index ["group_item_id"], name: "index_food_items_on_group_item_id"
   end
 
   create_table "group_items", force: :cascade do |t|
@@ -204,31 +240,18 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "group_items_options", id: false, force: :cascade do |t|
-    t.bigint "option_id", null: false
-    t.bigint "group_item_id", null: false
-    t.index ["group_item_id", "option_id"], name: "index_group_items_options_on_group_item_id_and_option_id"
-    t.index ["option_id", "group_item_id"], name: "index_group_items_options_on_option_id_and_group_item_id"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_group_items_on_discarded_at"
   end
 
   create_table "menu_items", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "menu_itemable_type", null: false
     t.bigint "menu_itemable_id", null: false
+    t.bigint "menu_id"
+    t.index ["menu_id"], name: "index_menu_items_on_menu_id"
     t.index ["menu_itemable_type", "menu_itemable_id"], name: "index_menu_items_on_menu_itemable"
-  end
-
-  create_table "menu_items_menus", id: false, force: :cascade do |t|
-    t.bigint "menu_id", null: false
-    t.bigint "menu_item_id", null: false
-    t.index ["menu_id", "menu_item_id"], name: "index_menu_items_menus_on_menu_id_and_menu_item_id"
-    t.index ["menu_item_id", "menu_id"], name: "index_menu_items_menus_on_menu_item_id_and_menu_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -236,14 +259,10 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "resturant_id", null: false
+    t.datetime "discarded_at"
+    t.integer "post_status"
+    t.index ["discarded_at"], name: "index_menus_on_discarded_at"
     t.index ["resturant_id"], name: "index_menus_on_resturant_id"
-  end
-
-  create_table "menus_timings", id: false, force: :cascade do |t|
-    t.bigint "menu_id", null: false
-    t.bigint "timing_id", null: false
-    t.index ["menu_id", "timing_id"], name: "index_menus_timings_on_menu_id_and_timing_id"
-    t.index ["timing_id", "menu_id"], name: "index_menus_timings_on_timing_id_and_menu_id"
   end
 
   create_table "option_items", force: :cascade do |t|
@@ -260,6 +279,8 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "group_item_id", null: false
+    t.index ["group_item_id"], name: "index_options_on_group_item_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -307,6 +328,8 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.integer "post_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_promo_tokens_on_discarded_at"
   end
 
   create_table "promo_tokens_resturants", id: false, force: :cascade do |t|
@@ -365,11 +388,13 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
   end
 
   create_table "timings", force: :cascade do |t|
-    t.string "days"
     t.string "start_time"
     t.string "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "days"
+    t.bigint "menu_id"
+    t.index ["menu_id"], name: "index_timings_on_menu_id"
   end
 
   create_table "token_valid_dates", force: :cascade do |t|
@@ -381,13 +406,21 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
     t.index ["promo_token_id"], name: "index_token_valid_dates_on_promo_token_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addon_items", "addons"
+  add_foreign_key "addons", "resturants"
   add_foreign_key "admin_charges", "orders"
+  add_foreign_key "deal_items", "deals"
   add_foreign_key "discount_timings", "discounts"
   add_foreign_key "employees", "employees", column: "manager_id"
   add_foreign_key "employees", "resturants"
+  add_foreign_key "food_items", "group_items"
+  add_foreign_key "menu_items", "menus"
   add_foreign_key "menus", "resturants"
   add_foreign_key "option_items", "food_items"
   add_foreign_key "option_items", "options"
+  add_foreign_key "options", "group_items"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "employees"
   add_foreign_key "orders", "promo_tokens"
@@ -400,5 +433,6 @@ ActiveRecord::Schema.define(version: 2022_09_15_141025) do
   add_foreign_key "resturant_schedules", "resturants"
   add_foreign_key "selected_addons", "addons"
   add_foreign_key "selected_addons", "order_items"
+  add_foreign_key "timings", "menus"
   add_foreign_key "token_valid_dates", "promo_tokens"
 end
